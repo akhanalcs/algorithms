@@ -1,5 +1,5 @@
 # algorithms
-Refeshing Algorithms from MS in Computer Science days.
+Refeshing Algorithms from Computer Science days.
 
 ## Logarithms
 What power do you have to raise the base to, to get another number.
