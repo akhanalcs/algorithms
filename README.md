@@ -9,5 +9,7 @@ For eg: $log{_2}{16}$ means
 - "What power do you have to raise `2` to, to get `16`?"
 
 ``` math
-\displaylines{log{_2}{16}=x \\ 16 = 2^x \\ 4 = x}
+\begin{align} log{_2}16&=x \\ 16& = 2^x \\ 4& = x\end{align}
 ```
+
+[Math formatting reference](https://github.com/mathjax/MathJax/issues/2312)
