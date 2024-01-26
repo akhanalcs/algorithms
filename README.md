@@ -1,6 +1,9 @@
 # algorithms
 Refeshing Algorithms from Computer Science days.
 
+## Helpful links
+1. [Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
+
 ## Logarithms
 What power do you have to raise the base to, to get another number.
 
