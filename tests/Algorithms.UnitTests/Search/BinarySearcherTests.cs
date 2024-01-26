@@ -1,16 +1,22 @@
+using Algorithms.Search;
 namespace Algorithms.UnitTests.Search;
 
 public class BinarySearcherTests
 {
-    // This attribute is used inside a TestFixture(this class) to provide a common set of functions that are performed just before each test method is called.
-    [SetUp]
-    public void Setup()
-    {
-    }
-    
     [Test]
-    public void BinarySearch()
+    public void BinarySearcher_Finds_Item()
     {
-        Assert.Pass();
+        int[] myList = [1, 3, 5, 7, 9];
+        var myListItem = myList[2];
+        var searchedItemIndex = BinarySearcher.FindIndex(myList, myListItem);
+        Assert.That(searchedItemIndex, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void BinarySearcher_Doesnt_Find_Item()
+    {
+        int[] myList = [1, 3, 5, 7, 9];
+        var searchedItemIndex = BinarySearcher.FindIndex(myList, 10);
+        Assert.That(searchedItemIndex, Is.EqualTo(-1));
     }
 }
