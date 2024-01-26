@@ -16,3 +16,9 @@ For eg: $log{_2}{16}$ means
 ```
 
 [Math formatting reference](https://github.com/mathjax/MathJax/issues/2312)
+
+## Big O Notation
+Big O notation tells you the number of operations an algorithm will make.
+
+For eg: In case of Binary search, the running time of the algorithm in Big O notation is `O(log n)`.
+
