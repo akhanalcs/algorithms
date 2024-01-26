@@ -20,5 +20,18 @@ For eg: $log{_2}{16}$ means
 ## Big O Notation
 Big O notation tells you the number of operations an algorithm will make.
 
-For eg: In case of Binary search, the running time of the algorithm in Big O notation is `O(log n)`.
+For eg: In case of Binary search, the running time of the algorithm in Big O notation is $O(\log n)$.
+
+## Binary Search Algorithm
+Binary search, also known as half-interval search, logarithmic search, or binary chop is a search algorithm that finds the position of a target value within a sorted array. 
+
+Binary search compares the target value to the middle element of the array. If they are not equal, the half in which the target cannot lie is eliminated and the search continues on the remaining half, again taking the middle element to compare to the target value, and repeating this until the target value is found. If the search ends with the remaining half being empty, the target is not in the array.
+
+Binary search runs in logarithmic time in the worst case, making $O(\log n)$ comparisons, where $n$ is the number of elements in the array.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/defbc02b-db11-4d7e-a3af-10350eb43369">
+
+Code example:
+https://github.com/akhanalcs/algorithms/blob/c8a7b652a67f6861bda113b18690c8fced8424ab/src/Algorithms/Search/BinarySearcher.cs#L3-L37
+
 
