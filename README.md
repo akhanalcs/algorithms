@@ -208,3 +208,24 @@ https://github.com/akhanalcs/algorithms/blob/f8338488287750ec939c2171a389424f354
 Tested using:
 https://github.com/akhanalcs/algorithms/blob/929d1c50ccdb4a00658c78ffb488e0d5ce9d6efa/tests/Algorithms.UnitTests/Sort/SelectionSorterTests.cs#L5-L20
 
+## Recursion
+Suppose you’re digging through your grandma’s attic and come across a mysterious locked suitcase.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/750d88ca-cd4a-4aa7-9c40-6f18e98351c7">
+
+Grandma tells you that the key for the suitcase is probably in this other box.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/1b577ed5-78ad-44b0-a0a3-9586c02ad19c">
+
+Here's a way to find the key using recursion
+```py
+# Every recursive function has two parts: the base case, and the recursive case
+def look_for_key(box):
+  for item in box:
+    # Recursive case: when the function calls itself.
+    if item.is_a_box():
+      look_for_key(item) # <--- Recursion!
+    # Base case: when the function doesn't call itself again
+    elif item.is_a_key():
+      print “found the key!”
+```
