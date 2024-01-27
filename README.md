@@ -202,3 +202,5 @@ You have an operation that takes $O(n)$ time, and you have to do that $n$ times:
 
 This takes $O(n × n)$ time or $O(n^2)$ time.
 
+Code example:
+https://github.com/akhanalcs/algorithms/blob/f8338488287750ec939c2171a389424f354d043b/src/Algorithms/Sort/SelectionSorter.cs#L5-L31
