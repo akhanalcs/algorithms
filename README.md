@@ -79,29 +79,29 @@ With linked lists, you never have to move your items.
 <table width="100%">
 <thead>
   <tr>
-    <th width="50%"><code>List<T></code></th>
-    <th width="50%"><code>LinkedList<T></code></th>
+    <th width="50%"><code>List&lt;T&gt;</code></th>
+    <th width="50%"><code>LinkedList&lt;T&gt;</code></th>
   </tr>
 </thead>
 <tbody>
   <tr>
   <td valign="top">
-  <p><code>List<T></code> is essentially just an array (with a wrapper), so random access is efficient.</p>
+  <p><code>List&lt;T&gt;</code> is essentially just an array (with a wrapper), so random access is efficient.</p>
   </td>
   <td valign="top">
-  <p><code>LinkedList<T></code> is composed of nodes with each node consisting its value and pointers/reference to the next and previous node.</p>
+  <p><code>LinkedList&lt;T&gt;</code> is composed of nodes with each node consisting its value and pointers/reference to the next and previous node.</p>
   <p>Elements' access is only efficient if it's done consecutively (either forwards or backwards).</p>
   <p>Random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer).</p>
   </td>
   </tr>
   <tr>
   <td valign="top">
-  <p>In most cases, <code>List<T></code> is more useful.</p>
-  <p><code>List<T></code> can only cheaply add/remove at the end of the list because it doesn't require shifting of elements.</p>
+  <p>In most cases, <code>List&lt;T&gt;</code> is more useful.</p>
+  <p><code>List&lt;T&gt;</code> can only cheaply add/remove at the end of the list because it doesn't require shifting of elements.</p>
   </td>
   <td valign="top">
-  <p>Adding or removing elements from a <code>LinkedList<T></code> can be done quickly at any position given you have a reference to a node close to the operation's location.</p>
-  <p><code>LinkedList<T></code> will have less cost when adding/removing items in the middle of the list.</p>
+  <p>Adding or removing elements from a <code>LinkedList&lt;T&gt;</code> can be done quickly at any position given you have a reference to a node close to the operation's location.</p>
+  <p><code>LinkedList&lt;T&gt;</code> will have less cost when adding/removing items in the middle of the list.</p>
   For example:
   
   ```csharp
@@ -126,31 +126,31 @@ With linked lists, you never have to move your items.
   <p>Index-based operations like accessing or updating an element are fast. <code>O(1)</code>.</p>
   </td>
   <td valign="top">
-  <p>There's no indexed access in </code>LinkedList<T></code> so random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer). <code>O(n)</code></p>
+  <p>There's no indexed access in </code>LinkedList&lt;T&gt;</code> so random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer). <code>O(n)</code></p>
   </td>
   </tr>
   <tr>
   <td valign="top">
-  <p>For operations which involve adding or removing elements not at the end of the <code>List<T></code>, it incurs <code>O(n)</code> cost due to shifting of elements.</p>  
+  <p>For operations which involve adding or removing elements not at the end of the <code>List&lt;T&gt;</code>, it incurs <code>O(n)</code> cost due to shifting of elements.</p>  
   </td>
   <td valign="top">
-  <p>Since each node points directly to its next node and previous node in a <code>LinkedList<T></code>, insertions and deletions in known locations can be done in <code>O(1)</code> time.</p>
-  </td>
-  </tr>
-  <tr>
-  <td valign="top">
-  <p><code>List<T></code> requires contiguous memory space and could incur overhead when resizing.</p>
-  </td>
-  <td valign="top">
-  <p><code>LinkedList<T></code> nodes can be anywhere in memory, which makes it more efficient when the list grows frequently.</p>
+  <p>Since each node points directly to its next node and previous node in a <code>LinkedList&lt;T&gt;</code>, insertions and deletions in known locations can be done in <code>O(1)</code> time.</p>
   </td>
   </tr>
   <tr>
   <td valign="top">
-  <p><code>List<T></code> generally more suited for cases where the size of the list is known in advance, or needs of random access operations are high.</p>
+  <p><code>List&lt;T&gt;</code> requires contiguous memory space and could incur overhead when resizing.</p>
   </td>
   <td valign="top">
-  <p><code>LinkedList<T></code> is often preferable when you need to frequently add or remove items in the list and the access is mostly sequential.</p>
+  <p><code>LinkedList&lt;T&gt;</code> nodes can be anywhere in memory, which makes it more efficient when the list grows frequently.</p>
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p><code>List&lt;T&gt;</code> generally more suited for cases where the size of the list is known in advance, or needs of random access operations are high.</p>
+  </td>
+  <td valign="top">
+  <p><code>LinkedList&lt;T&gt;</code> is often preferable when you need to frequently add or remove items in the list and the access is mostly sequential.</p>
   </td>
   </tr>
 </tbody>
