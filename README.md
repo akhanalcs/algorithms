@@ -74,11 +74,11 @@ address with the previous item.
 With linked lists, you never have to move your items. 
 
 ### List<T> vs LinkedList<T> in C#
-<table>
+<table width="100%">
 <thead>
   <tr>
-    <th><code>List<T></code></th>
-    <th><code>require</code></th>
+    <th width="50%"><code>List<T></code></th>
+    <th width="50%"><code>LinkedList<T></code></th>
   </tr>
 </thead>
 <tbody>
@@ -95,40 +95,44 @@ With linked lists, you never have to move your items.
   <tr>
   <td valign="top">
   <p>In most cases, <code>List<T></code> is more useful.</p>
-  <p>`List<T>` can only cheaply add/remove at the end of the list because it doesn't require shifting of elements.</p>
+  <p><code>List<T></code> can only cheaply add/remove at the end of the list because it doesn't require shifting of elements.</p>
   </td>
   <td valign="top">
-  <p>Adding or removing elements from a `LinkedList<T>` can be done quickly at any position given you have a reference to a node close to the operation's location.</p>
+  <p>Adding or removing elements from a <code>LinkedList<T></code> can be done quickly at any position given you have a reference to a node close to the operation's location.</p>
   <p><code>LinkedList<T></code> will have less cost when adding/removing items in the middle of the list.</p>
   For example:
   
-  ```cs
+  ```csharp
   LinkedList<int> myList = new LinkedList<int>();
   myList.AddLast(1);
-  LinkedListNode<int> myNode = myList.AddLast(2); // We keep a reference to this node
+  // We keep a reference to this node
+  LinkedListNode<int> myNode = myList.AddLast(2);
   myList.AddLast(3);
   ```
-  <p>We can insert a new element after the element 2. Since you already have a reference to this Node, you can simple use the <code>AddAfter</code> method:</p>
+
+  <p>We can insert a new element after the element 2. Since you already have a reference to this Node, you can simply use the <code>.AddAfter</code> method:</p>
   
-  ```cs
-  myList.AddAfter(myNode, 4); // This will insert 4 after 2
+  ```csharp
+  // This will insert 4 after 2
+  myList.AddAfter(myNode, 4);
   ```
+
   </td>
   </tr>
   <tr>
   <td valign="top">
-  <p>Index-based operations like accessing or updating an element are fast. $O(1)$.</p>
+  <p>Index-based operations like accessing or updating an element are fast. <code>O(1)</code>.</p>
   </td>
   <td valign="top">
-  <p>There's no indexed access in </code>LinkedList<T></code> so random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer). $O(n)$</p>
+  <p>There's no indexed access in </code>LinkedList<T></code> so random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer). <code>O(n)</code></p>
   </td>
   </tr>
   <tr>
   <td valign="top">
-  <p>For operations which involve adding or removing elements not at the end of the <code>List<T></code>, it incurs $O(n)$ cost due to shifting of elements.</p>  
+  <p>For operations which involve adding or removing elements not at the end of the <code>List<T></code>, it incurs <code>O(n)</code> cost due to shifting of elements.</p>  
   </td>
   <td valign="top">
-  <p>Since each node points directly to its next node and previous node in a <code>LinkedList<T></code>, insertions and deletions in known locations can be done in $O(1)$ time.</p>
+  <p>Since each node points directly to its next node and previous node in a <code>LinkedList<T></code>, insertions and deletions in known locations can be done in <code>O(1)</code> time.</p>
   </td>
   </tr>
   <tr>
