@@ -73,6 +73,30 @@ address with the previous item.
 
 With linked lists, you never have to move your items. 
 
+### Insertions and deletions work great in Lists
+Lets say you want to add items in a certain order.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a59e4c61-2ab3-4de2-9b7b-ea23e83887f0">
+
+With lists, it’s as easy as changing what the previous element points to.
+
+<img width="650" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/42cfd79f-0ff6-46b8-a91c-efe3772a488d">
+
+But for arrays, you have to shift all the rest of the elements down.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/57c70d22-2937-4fea-ad69-13e5e9e9385c">
+
+And if there’s no space, you might have to copy everything to a new location! Lists are better if you want to insert elements into the middle. 
+
+### Runtimes for common operations on Arrays and Lists
+|  | Arrays | Lists |
+|---|---|---|
+| Reading | $O(1)$ | $O(n)$ |
+| Insertion | $O(n)$ | $O(1)$ |
+| Deletion | $O(n)$ | $O(1)$ |
+
+It’s worth mentioning that insertions and deletions are $O(1)$ time only if you can instantly access the element to be deleted. It’s a common practice to keep track of the first and last items in a linked list, so it would take only $O(1)$ time to delete those.
+
 ### List<T> vs LinkedList<T> in C#
 [Reference](https://stackoverflow.com/a/169983/8644294)
 
