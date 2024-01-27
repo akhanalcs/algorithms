@@ -74,6 +74,8 @@ address with the previous item.
 With linked lists, you never have to move your items. 
 
 ### List<T> vs LinkedList<T> in C#
+[Reference](https://stackoverflow.com/a/169983/8644294)
+
 <table width="100%">
 <thead>
   <tr>
