@@ -7,9 +7,9 @@ public class BinarySearcherTests
     public void BinarySearcher_Finds_Item()
     {
         int[] myList = [1, 3, 5, 7, 9];
-        var myListItem = myList[2];
+        var myListItem = myList[3];
         var searchedItemIndex = BinarySearcher.FindIndex(myList, myListItem);
-        Assert.That(searchedItemIndex, Is.EqualTo(2));
+        Assert.That(searchedItemIndex, Is.EqualTo(3));
     }
 
     [Test]

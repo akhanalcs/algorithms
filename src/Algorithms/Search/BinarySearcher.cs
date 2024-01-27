@@ -2,6 +2,9 @@ namespace Algorithms.Search;
 
 public static class BinarySearcher
 {
+    // Binary search needs log n operations to check a list of size n
+    // So, Time complexity: O(log n)
+    // Big O notation tells you the number of operations an algorithm will make
     public static int FindIndex(int[] sortedData,  int item)
     {
         // Low and high keep track of which part of the list you’ll search in.
