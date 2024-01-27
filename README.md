@@ -180,3 +180,25 @@ It’s worth mentioning that insertions and deletions are $O(1)$ time only if yo
 </tbody>
 </table>
 
+## Selection Sort Algorithm
+Suppose you have a bunch of music on your computer. For each artist, you have a play count.
+You want to sort this list from most to least played, so that you can rank your favorite artists. 
+
+One way is to go through the list and find the most-played artist. Add that artist to a new list.
+
+<img width="550" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/82531c93-b3ff-4741-b68d-f9150cada251">
+
+Do it again to find the next-most-played artist.
+
+<img width="550" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/c06c9604-8199-44fc-ae2b-de524766da8a">
+
+Keep doing this, and you’ll end up with a sorted list.
+
+Now let's find how long it takes to run. **Remember that $O(n)$ time means you touch every element in a list once**.
+
+You have an operation that takes $O(n)$ time, and you have to do that $n$ times:
+
+<img width="750" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a42b74a6-7d4f-4959-b447-e86d40daa3ad">
+
+This takes $O(n × n)$ time or $O(n^2)$ time.
+
