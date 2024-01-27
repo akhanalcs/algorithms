@@ -22,6 +22,11 @@ Big O notation tells you the number of operations an algorithm will make.
 
 For eg: In case of Binary search, the running time of the algorithm in Big O notation is $O(\log n)$.
 
+- Algorithm speed isn't measured in seconds, but in growth of the number of seconds.
+- Instead, we talk about how quickly the runtime of an algorithm increases as the size of the input increases.
+- Run time of algorithms is expressed in Big $O$ notation.
+- $O(\log n)$ is faster than $O(n)$, but it gets a lot faster as the list of items you’re searching grows.
+
 ## Binary Search Algorithm
 Binary search, also known as half-interval search, logarithmic search, or binary chop is a search algorithm that finds the position of a target value within a sorted array. 
 
@@ -34,4 +39,9 @@ Binary search runs in logarithmic time in the worst case, making $O(\log n)$ com
 Code example:
 https://github.com/akhanalcs/algorithms/blob/c8a7b652a67f6861bda113b18690c8fced8424ab/src/Algorithms/Search/BinarySearcher.cs#L3-L37
 
-
+## Common Big O run times
+- $O(\log n)$, also known as _log time_. Example: Binary search.
+- $O(n)$, also known as _linear time_. Example: Simple search.
+- $O(n * \log n)$. Example: A fast sorting algorithm, like quicksort.
+- $O(n^2)$. Example: A slow sorting algorithm, like selection sort.
+- $O(n!)$. Example: A really slow algorithm, like the traveling salesperson.
