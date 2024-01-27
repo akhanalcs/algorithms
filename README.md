@@ -43,5 +43,110 @@ https://github.com/akhanalcs/algorithms/blob/c8a7b652a67f6861bda113b18690c8fced8
 - $O(\log n)$, also known as _log time_. Example: Binary search.
 - $O(n)$, also known as _linear time_. Example: Simple search.
 - $O(n * \log n)$. Example: A fast sorting algorithm, like quicksort.
-- $O(n^2)$. Example: A slow sorting algorithm, like selection sort.
-- $O(n!)$. Example: A really slow algorithm, like the traveling salesperson.
+- $O(n^2)$. Example: A slow sorting algorithm, like selection sort. Try to remember it like `ss` so `nn` -> $n^2$.
+- $O(n!)$. Example: A really slow algorithm, like the traveling salesperson. For eg: To go through 5 cities, you have to calculate $5!$ which is $120$. It grows really, really fast. 🤯
+
+## Arrays and Linked Lists
+### Arrays
+Sometimes you need to store a list of elements in memory. Suppose you’re writing an app to manage your todos. You’ll want to store the todos as a list in memory.
+For eg, the todo list is:
+- Brunch
+- Bocce
+- Tea
+
+Storing the todos in array looks like
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a5160383-67db-43eb-8abf-ae7ed0b524c8">
+
+Now suppose you want to add a fourth task. But the next memory location is taken up by someone else’s stuff.
+
+If you’re out of space and need to move to a new spot in memory every time, adding a new item will be really slow.
+
+### Linked Lists
+With linked lists, your items can be anywhere in memory.
+Each item stores the address of the next item in the list. A bunch of random memory addresses are linked together.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/36a034ae-33a6-4c8d-bc50-7e7bc1d2c109">
+
+You go to the first address, and it says, “The next item can be found at address 123.” So you go to address 123, and it says, “The next item can be found at address 847,” and so on. Adding an item to a linked list is easy: you stick it anywhere in memory and store the 
+address with the previous item.
+
+With linked lists, you never have to move your items. 
+
+### List<T> vs LinkedList<T> in C#
+<table>
+<thead>
+  <tr>
+    <th><code>List<T></code></th>
+    <th><code>require</code></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+  <td valign="top">
+  <p><code>List<T></code> is essentially just an array (with a wrapper), so random access is efficient.</p>
+  </td>
+  <td valign="top">
+  <p><code>LinkedList<T></code> is composed of nodes with each node consisting its value and pointers/reference to the next and previous node.</p>
+  <p>Elements' access is only efficient if it's done consecutively (either forwards or backwards).</p>
+  <p>Random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer).</p>
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p>In most cases, <code>List<T></code> is more useful.</p>
+  <p>`List<T>` can only cheaply add/remove at the end of the list because it doesn't require shifting of elements.</p>
+  </td>
+  <td valign="top">
+  <p>Adding or removing elements from a `LinkedList<T>` can be done quickly at any position given you have a reference to a node close to the operation's location.</p>
+  <p><code>LinkedList<T></code> will have less cost when adding/removing items in the middle of the list.</p>
+  For example:
+  
+  ```cs
+  LinkedList<int> myList = new LinkedList<int>();
+  myList.AddLast(1);
+  LinkedListNode<int> myNode = myList.AddLast(2); // We keep a reference to this node
+  myList.AddLast(3);
+  ```
+  <p>We can insert a new element after the element 2. Since you already have a reference to this Node, you can simple use the <code>AddAfter</code> method:</p>
+  
+  ```cs
+  myList.AddAfter(myNode, 4); // This will insert 4 after 2
+  ```
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p>Index-based operations like accessing or updating an element are fast. $O(1)$.</p>
+  </td>
+  <td valign="top">
+  <p>There's no indexed access in </code>LinkedList<T></code> so random access is relatively expensive since it must walk the chain each time (hence why it doesn't have an indexer). $O(n)$</p>
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p>For operations which involve adding or removing elements not at the end of the <code>List<T></code>, it incurs $O(n)$ cost due to shifting of elements.</p>  
+  </td>
+  <td valign="top">
+  <p>Since each node points directly to its next node and previous node in a <code>LinkedList<T></code>, insertions and deletions in known locations can be done in $O(1)$ time.</p>
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p><code>List<T></code> requires contiguous memory space and could incur overhead when resizing.</p>
+  </td>
+  <td valign="top">
+  <p><code>LinkedList<T></code> nodes can be anywhere in memory, which makes it more efficient when the list grows frequently.</p>
+  </td>
+  </tr>
+  <tr>
+  <td valign="top">
+  <p><code>List<T></code> generally more suited for cases where the size of the list is known in advance, or needs of random access operations are high.</p>
+  </td>
+  <td valign="top">
+  <p><code>LinkedList<T></code> is often preferable when you need to frequently add or remove items in the list and the access is mostly sequential.</p>
+  </td>
+  </tr>
+</tbody>
+</table>
+
