@@ -15,6 +15,6 @@ public class SelectionSorterTests
         SelectionSorter.Sort(unSortedItems);
         
         // Assert
-        Assert.That(sortedItems, Is.EqualTo(unSortedItems));
+        Assert.That(unSortedItems, Is.EqualTo(sortedItems));
     }
 }
