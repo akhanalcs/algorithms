@@ -204,3 +204,7 @@ This takes $O(n × n)$ time or $O(n^2)$ time.
 
 Code example:
 https://github.com/akhanalcs/algorithms/blob/f8338488287750ec939c2171a389424f354d043b/src/Algorithms/Sort/SelectionSorter.cs#L5-L31
+
+Tested using:
+https://github.com/akhanalcs/algorithms/blob/ce8477983d96ffb70f021c3a7c5d0268e20a1e1f/tests/Algorithms.UnitTests/Sort/SelectionSorterTests.cs#L5-L20
+
