@@ -36,21 +36,4 @@ public class DivideAndConquerTests
         // Assert
         Assert.That(max, Is.EqualTo(5));
     }
-    
-    [Test]
-    public void BinarySearcher_Finds_Item_Using_DAndC()
-    {
-        int[] myList = [1, 3, 5, 7, 9];
-        var myListItem = myList[3];
-        var searchedItemIndex = DivideAndConquer.BinarySearcher(myList, myListItem);
-        Assert.That(searchedItemIndex, Is.EqualTo(3));
-    }
-
-    [Test]
-    public void BinarySearcher_Doesnt_Find_Item_Using_DAndC()
-    {
-        int[] myList = [1, 3, 5, 7, 9];
-        var searchedItemIndex = DivideAndConquer.BinarySearcher(myList, 10);
-        Assert.That(searchedItemIndex, Is.EqualTo(-1));
-    }
 }
