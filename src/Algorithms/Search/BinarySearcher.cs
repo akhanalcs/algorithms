@@ -5,9 +5,9 @@ public static class BinarySearcher
     // Binary search needs log n operations to check a list of size n
     // So, Time complexity: O(log n)
     // Big O notation tells you the number of operations an algorithm will make
-    public static int FindIndexUsingLoop(int[] sortedData,  int item)
+    public static int FindIndexUsingLoop(int[] sortedData, int item)
     {
-        // Low and high keep track of which part of the list you’ll search in.
+        // leftIndex and rightIndex keep track of which part of the array you’ll search in.
         var leftIndex = 0;
         var rightIndex = sortedData.Length - 1;
 
@@ -18,10 +18,7 @@ public static class BinarySearcher
             var midIndex = (leftIndex + rightIndex) / 2;
             var guess = sortedData[midIndex];
             
-            if (guess == item)
-            {
-                return midIndex;
-            }
+            if (guess == item) return midIndex;
 
             // The guess was too high
             if (guess > item)
