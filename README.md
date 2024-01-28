@@ -217,15 +217,76 @@ Grandma tells you that the key for the suitcase is probably in this other box.
 
 <img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/1b577ed5-78ad-44b0-a0a3-9586c02ad19c">
 
-Here's a way to find the key using recursion
+Here's a way to find the key using recursion (**pseudocode**)
 ```py
 # Every recursive function has two parts: the base case, and the recursive case
 def look_for_key(box):
   for item in box:
-    # Recursive case: when the function calls itself.
+    # Recursive case: when the function calls itself
     if item.is_a_box():
       look_for_key(item) # <--- Recursion!
     # Base case: when the function doesn't call itself again
     elif item.is_a_key():
       print “found the key!”
 ```
+
+Check out the Recursion folder for code examples.
+
+## Quicksort
+Quicksort is a sorting algorithm. It’s much faster than selection sort $O(n^2)$ and is frequently used in real life.
+In the worst case, quicksort takes $O(n^2)$ time. In the average case, quicksort takes $O(n * \log n)$ time.
+
+The simplest arrays that a sorting algorithm can handle
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a8f2c186-5a8a-40be-bddf-a83696244b77">
+
+Empty arrays and arrays with just one element will be the base case. You can just return those arrays as is—there’s nothing to sort:
+```py
+def quicksort(array):
+  if len(array) < 2:
+    return array
+```
+
+An array with two elements is pretty easy to sort too.
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/b557fbf2-8463-414b-be3c-15557b5b43a2">
+
+Consider an array of 4 elements.
+
+<table>
+<thead>
+  <tr>
+    <th>$33$</th>
+    <th>$10$</th>
+    <th>$15$</th>
+    <th>$7$</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+Remember that you're using D&C, so you want to break down this array until you're at the base case.
+
+First, pick an element from the array. This element is called the _pivot_. For eg: $33$.
+
+Now find the elements smaller than the pivot and the elements larger than the pivot. This is called _partitioning_.
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/460c03d4-aec9-4b53-b76e-195d4eff4646">
+
+Now you have 
+- A sub-array of all the numbers less than or equal to the pivot
+- The pivot 
+- A sub-array of all the numbers greater than the pivot
+
+The array on the left has three elements. You already know how to sort an array of three elements: call quicksort on it recursively.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/1ddb24e1-0923-4598-a6ae-b3ff42fbb2d3">
+
+```
+quicksort([10, 15, 7]) + [33] + quicksort([])
+> [7, 10, 15] + [33] + []
+> [7, 10, 15, 33]
+```
+
+
