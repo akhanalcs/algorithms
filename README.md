@@ -288,5 +288,88 @@ quicksort([10, 15, 7]) + [33] + quicksort([])
 > [7, 10, 15] + [33] + []
 > [7, 10, 15, 33]
 ```
+Code example:
+https://github.com/akhanalcs/algorithms/blob/4215d8cf60cb10c94ac8c191c2db94b034b833c3/tests/Algorithms.UnitTests/Sort/QuickSorterTests.cs#L5-L18
+
+## Hash Functions
+A hash function is a function where you put in a string and you get back a number.
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/30d15112-6abc-46db-ab22-c0697ed78d0e">
+
+- It needs to be consistent. For example, suppose you put in “apple” and get back “4”. Every time you put in “apple”, you should get “4” back. Without this, your hash table won’t work.
+- It should map different words to different numbers. For example, a hash function is no good if it always returns “1” for any word you put in. In the best case, every different word should map to a different number.
+- The hash function knows how big your array is and only returns valid indexes. So if your array is 5 items, the hash function doesn’t return 100 … that wouldn’t be a valid index in the array.
+
+Let's create a price catalog using it.
+
+Start with an empty array. You’ll store all of your prices in this array.
+
+<img width="200" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d9c9a8c8-3cc6-4cca-acfb-ea50fbed0063">
+
+Let’s add the price of an apple. Feed “apple” into the hash function.
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/20383ee9-9787-40c1-8853-b92914c76cb1">
+
+The hash function outputs “3”. So let’s store the price of an apple at index 3 in the array.
+
+<img width="250" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/2b95a5f2-ee58-46a3-9734-e72cc4fdb5e2">
+
+Now you ask, “Hey, what’s the price of an apple?” You don’t need to search for it in the array. Just feed “apple” into the hash function.
+It tells you that the price is stored at index 3.
+
+The hash function tells you exactly where the price is stored, so you don’t have to search at all! 
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/02e635e7-7d03-4be4-a8fb-6847777ad385">
+
+### Good hash function
+A good hash function distributes values in the array evenly.
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/031625f3-2541-41ec-81d7-ef7b0a3f8eab">
+
+A bad hash function groups values together and produces a lot of collisions.
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/570d541b-4827-412b-9015-c7507d301303">
+
+## Hash Table
+Hash Table = Hash Function + Array
+
+C# has a type `Dictionary<TKey,TValue>` which is type-safe and can often be used as an alternative to Hashtable. For example:
+```cs
+Dictionary<string, double> catalog = new();
+
+catalog["apple"] = 0.67;
+catalog["milk"] = 1.49;
+catalog["avocado"] = 0.99;
+
+foreach(var key in catalog.Keys)
+{
+    Console.WriteLine($"Key: {key}, Value: {dictionary[key]}");
+}
+```
+
+Performance of Hash tables
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/5e8a4386-462b-4b77-ba88-5e4babe17b0d">
+
+In the average case, hash tables take O(1) for everything. $O(1)$ is called constant time.
+It doesn’t mean instant. It means the time taken will stay the same, regardless of how big the hash table is.
+
+<p align="left">
+  <img width="185" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/f81d0771-bdb7-4e6e-b1dc-b6c94f0b1eee">
+&nbsp;
+  <img width="201" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/86402cf5-cb31-484d-951d-262ed4510138">
+&nbsp;
+  <img width="208" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/db1e16b7-1741-4449-ae2f-37c364ca4edf">
+</p>
+
+Comparision of Hash tables to Arrays and Linked Lists
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a6565709-8de5-4f81-9416-7f82adf10101">
+
+
+
+
+
+
 
 
