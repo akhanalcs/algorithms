@@ -366,10 +366,76 @@ Comparision of Hash tables to Arrays and Linked Lists
 
 <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a6565709-8de5-4f81-9416-7f82adf10101">
 
+## Breadth-first search
+The algorithm to solve a shortest-path problem is called breadth-first search.
 
+Breadthfirst search runs on graphs. It can help answer two types of questions:
+- Question type 1: Is there a path from node A to node B?
+- Question type 2: What is the shortest path from node A to node B?
 
+Suppose you’re in San Francisco, and you want to go from Twin Peaks to the Golden Gate Bridge. You want to get there by bus, with the minimum number of transfers. Here are your options:
 
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d8e706af-0492-4ec7-894c-13ea3359253d">
 
+The shortest route to the bridge is three steps long.
 
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/8de8c1ec-f204-42d5-b96b-25a0c31ed2ec">
 
+To figure out how to get from Twin Peaks to the Golden Gate Bridge, there are two steps:
+1. Model the problem as a graph.
+2. Solve the problem using breadth-first search.
 
+### Queues
+The queue is called a FIFO data structure: First In, First Out. In contrast, a stack is a LIFO data structure: Last In, First Out.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/10e0c5c9-c52a-43e7-957c-1bc1d05df7f5">
+
+### Example 1: Find the mango seller
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a25a51f7-c1bc-4b35-9b8c-fe9fcd09b0ba">
+
+You want to find the mango seller using breadth-first search.
+
+To implement the graph in code, you can use a data structure that lets you express relationships: a **hash table**!
+
+Here's how it looks like in Python
+```py
+graph = {}
+graph[“you”] = [“alice”, “bob”, “claire”]
+# Notice that in a directed graph like this, you only put names that have arrow directed towards them.
+graph[“bob”] = [“anuj”, “peggy”]
+graph[“alice”] = [“peggy”]
+graph[“claire”] = [“thom”, “jonny”]
+graph[“anuj”] = []
+graph[“peggy”] = []
+graph[“thom”] = []
+graph[“jonny”] = []
+```
+
+This is how you'll implement the search
+
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/7f9d681a-de93-4d05-8fa2-8ed98dd9f8eb">
+
+Here's how the search looks like in Python
+```py
+def search(name):
+  search_queue = deque()
+  search_queue += graph[name] 
+  searched = [] # This array is how you keep track of which people you’ve searched before.
+  while search_queue:
+    person = search_queue.popleft() 
+    if not person in searched: # Only search this person if you haven’t already searched them.
+      if person_is_seller(person):
+        print person + “ is a mango seller!”
+        return True
+      else:
+        search_queue += graph[person] 
+      searched.append(person) # Marks this person as searched
+  return False
+
+search(“you”)
+```
+
+Implementation of this in C# looks like below
+https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/tests/Algorithms.UnitTests/Search/BreadthFirstSearcherTests.cs#L7-L31
+
+https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/src/Algorithms/Search/BreadthFirstSearcher.cs#L3-L39
