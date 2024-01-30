@@ -439,3 +439,45 @@ Implementation of this in C# looks like below
 https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/tests/Algorithms.UnitTests/Search/BreadthFirstSearcherTests.cs#L7-L31
 
 https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/src/Algorithms/Search/BreadthFirstSearcher.cs#L3-L39
+
+#### Running time
+If you search your entire network for a mango seller, that means you’ll follow each edge (remember, an edge is the arrow or connection from one person to another). So the running time is at least $O(number of edges)$.
+
+You also keep a queue of every person to search. Adding one person to the queue takes constant time: $O(1)$. Doing this for every person will take $O(number of people)$ total. Breadth-first search takes $O(number of people + number of edges)$, and it’s more commonly written as $O(V+E)$. $V$ for number of vertices, $E$ for number of edges.
+
+### Dependency
+Arrow is pointed towards a dependency.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/e185cd90-a44c-4ea8-88b7-c8c4fb2df896">
+
+It tells you that I can’t eat breakfast until I’ve brushed my teeth. So “eat breakfast” depends on “brush teeth”.
+
+On the other hand, showering doesn’t depend on brushing my teeth, because I can shower before I brush my teeth. 
+
+From this graph, you can make a list of the order in which I need to do my morning routine:
+
+| 1. Wake up | 1. Wake up |
+|:---|:---|
+| **2. Shower** | **2. Brush teeth** |
+| **3. Brush teeth** | **3. Shower** |
+| **4. Eat breakfast** | **4. Eat breakfast** |
+
+If task A (Shower) depends on task B (Wake up), task A shows up later in the list.
+
+Dependent (Shower) always shows up later because the dependency (Wake up) needs to be resolved first.
+
+### Tree
+A tree is a special type of graph, where no edges ever point back.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/4fe22e05-a49e-4046-9ec2-1ae275fe8b08">
+
+## Dijkstra's algorithm (finds the path with smallest total weight)
+Compare it to BFS (which finds the path with fewest segments)
+
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d852c3b0-ac97-4d6b-9b8f-71b0d301c77b">
+
+### Weighted graphs vs Unweighted graphs
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/37df2b0d-7667-4ecc-a28d-40d5a9618254">
+
+To calculate the **shortest path** in an **unweighted** graph, use **breadth-first search**. To calculate the **shortest path** in a **weighted** graph, use **Dijkstra’s algorithm**.
+
