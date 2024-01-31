@@ -1,10 +1,5 @@
 # algorithms
-Refeshing Algorithms from Computer Science days.
-
-
-
-
-
+Refreshing Algorithms from Computer Science days.
 
 ## Helpful links
 1. [Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
@@ -493,115 +488,31 @@ Dijkstra’s algorithm has four steps:
 
 For eg:
 
-<img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/acd2f5f8-3098-41e4-a116-cc1d5dc634c9">
+Imagine you have a book, and you want trade it for a piano. Your friends Alex, Amy and Beethoven are willing to trade various items.
 
-1. Step 1: Find the cheapest node by standing at the start.
-   | Node | Time To Node |
-   |---|---|
-   | A | $6$ |
-   | B | $2$ |
-   | Finish | $∞$ |
+How are you going to figure out the path from the book to the piano where you spend the least amount of money? 
 
-   B is the cheapest node.
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/551768fa-2e4f-4388-836d-15086d6524ed">
 
-2. Step 2: Calculate how long it takes to get to all of node B's neighbors by following an edge **from** B.
-   | Node | Time To Node |
-   |---|---|
-   | A | $5$ |
-   | B | $2$ |
-   | Finish | $7$ |
+| Parent<br>(When cost<br>updates, you<br>get a parent) | Node | Standing at Book<br>(only neighbors<br>of Book updated)<br><br>Cost 1 | Standing at Poster<br>(only neighbors<br>of Poster updated)<br><br>Cost 2 | Standing at LP<br>(only neighbors<br>of LP updated)<br><br>Cost 3 | Standing at Guitar<br>(only neighbors<br>of Guitar updated)<br><br>Cost 4 | Standing at Drumset<br>(only neighbors<br>of Drumset updated)<br><br>Cost 5 |
+|---|---|---|---|---|---|---|
+| Book | LP | $5$<br>💥 Updated | $5$<br>^^^^ C2W 🏆 | $5$ | $5$ | $5$ |
+| Book | Poster | $0$<br>💥 Updated<br>^^^^ C1W 🏆 | $0$ | $0$ | $0$ | $0$ |
+| Poster -> LP | Guitar | $∞$ | C1W + $30$ = $30$<br>💥 Updated | C2W + $15$ = $20$<br>💥 Updated<br>^^^^ C3W 🏆 | $20$ | $20$ |
+| Poster -> LP | Drumset | $∞$ | C1W + $35$ = $35$<br>💥 Updated | C2W + $20$ = $25$<br>💥 Updated | $25$<br>^^^^ C4W 🏆 | $25$ |
+| Guitar -> Drumset | Piano | $∞$ | $∞$ | $∞$ | C3W + $20$ = $40$<br>💥 Updated | C4W + $10$ = $35$<br>💥 Updated<br>^^^^ C5W 🏆 |
+|  |  | At this point:<br>✅ Book | At this point:<br>✅ Book<br>✅ Poster | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar<br>✅ Drumset |
 
-3. Step 1 again: Find the node that takes the least amount of time to get to. You're done with node B, so node A has the next smallest time estimate. 
-   | Node | Time To Node |
-   |---|---|
-   | A | $5$ |
-   | B | $2$ |
-   | Finish | $7$ |
+At this point, you've run Dijkstra's algorithm for every node (you don't need to run it for the finish node).
 
-4. Step 2 again: Update the costs for node A's neighbors.
-   | Node | Time To Node |
-   |---|---|
-   | A | $5$ |
-   | B | $2$ |
-   | Finish | $6$ |
+Now you know that the shortest/ cheapest path costs $35. Let's figure out the path.
 
-   At this point, you've run Dijkstra's algorithm for every node (you don't need to run it for the finish node).
+Piano has Drumset as parent, so you trade Drumset for Piano. And Drumset has LP as parent. And LP has Book as parent.
 
-<img width="250" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/25671db7-d3f3-4f43-a69b-8b393f78328f">
+So here's the series of trades you'll need to make:
 
-Another example:
+<img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/154a3381-7820-49ea-99f6-8739c740a3c1">
 
-<div style="overflow-x:scroll;">
-<table style="table-layout:fixed; width:100%;">
-<thead>
-  <tr>
-    <th width="200px">Parent<br>(When cost<br>updates, you<br>get a parent)</th>
-    <th width="100px">Node</th>
-    <th width="200px">Standing at Book<br>(only neighbors<br>of Book updated)<br><br>Cost 1</th>
-    <th width="200px">Standing at Poster<br>(only neighbors<br>of Poster updated)<br><br>Cost 2</th>
-    <th width="200px">Standing at LP<br>(only neighbors<br>of LP updated)<br><br>Cost 3</th>
-    <th width="200px">Standing at Guitar<br>(only neighbors<br>of Guitar updated)<br><br>Cost 4</th>
-    <th width="200px">Standing at Drumset<br>(only neighbors<br>of Drumset updated)<br><br>Cost 5</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Book</td>
-    <td>LP <br><br>Upd--&gt;</td>
-    <td>$5$<br><br>Updated, so Book is<br>set as parent</td>
-    <td>$5$<br><br>^^^^C2W<br></td>
-    <td>$5$</td>
-    <td>$5$</td>
-    <td>$5$</td>
-  </tr>
-  <tr>
-    <td>Book</td>
-    <td>Poster <br><br>Upd--&gt;</td>
-    <td>$0$<br><br>^^^^ C1W<br><br>Updated, so Book is<br>set as parent</td>
-    <td>$0$</td>
-    <td>$0$</td>
-    <td>$0$</td>
-    <td>$0$</td>
-  </tr>
-  <tr>
-    <td>Poster -&gt; LP</td>
-    <td>Guitar</td>
-    <td>$∞$<br><br>Upd--&gt;</td>
-    <td>C1W + $30$ = $30$<br><br><br>Updated, so Poster is<br>set as parent<br><br>Upd--&gt;</td>
-    <td>C2W + $15$ = $20$<br><br>^^^^ C3W<br><br>Updated, so LP is<br>set as parent</td>
-    <td>$20$</td>
-    <td>$20$</td>
-  </tr>
-  <tr>
-    <td>Poster -&gt; LP</td>
-    <td>Drumset</td>
-    <td>$∞$ <br><br>Upd--&gt;</td>
-    <td>C1W + $35$ = $35$<br><br><br>Updated, so Poster is<br>set as parent<br><br>Upd--&gt;</td>
-    <td>C2W + $20$ = $25$<br><br>Updated, so LP is<br>set as parent</td>
-    <td>$25$<br><br>^^^^ C4W</td>
-    <td>$25$</td>
-  </tr>
-  <tr>
-    <td>Guitar -&gt; Drumset</td>
-    <td>Piano</td>
-    <td>$∞$</td>
-    <td>$∞$</td>
-    <td>$∞$ <br><br>Upd--&gt;</td>
-    <td>C3W + $20$ = $40$<br><br>Updated, so Guitar<br>is set as parent<br><br>Upd--&gt;</td>
-    <td>C4W + $10$ = $35$<br><br>^^^^ C5W<br><br>Updated, so Drumset<br>is set as parent</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td>At this point:<br>✅ Book</td>
-    <td>At this point:<br>✅ Book<br>✅ Poster</td>
-    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP</td>
-    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar</td>
-    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar<br>✅ Drumset</td>
-  </tr>
-</tbody>
-</table>
-</div>
 
 
 
