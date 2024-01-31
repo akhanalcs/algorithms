@@ -44,10 +44,7 @@ public static class BinarySearcher
         var midIndex = sortedItems.Length / 2;
         var guess = sortedItems[midIndex];
 
-        if (guess == item)
-        {
-            return midIndex;
-        }
+        if (guess == item) return midIndex;
         
         // Recursive cases
         // 1. Throw away the right half and search again

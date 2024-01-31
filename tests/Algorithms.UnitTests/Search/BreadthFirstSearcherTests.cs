@@ -10,6 +10,7 @@ public class BreadthFirstSearcherTests
         // Arrange
         var graph = new Dictionary<string, string[]>
         {
+            // node, [neighbors]
             { "you", ["bob", "claire", "alice"] },
             { "bob", ["anuj", "peggy"] },
             { "alice", ["peggy"] },
