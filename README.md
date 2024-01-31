@@ -1,5 +1,5 @@
 # algorithms
-Refeshing Algorithms from Computer Science days.
+Refreshing Algorithms from Computer Science days.
 
 ## Helpful links
 1. [Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
@@ -366,10 +366,168 @@ Comparision of Hash tables to Arrays and Linked Lists
 
 <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a6565709-8de5-4f81-9416-7f82adf10101">
 
+## Breadth-first search
+The algorithm to solve a shortest-path problem is called breadth-first search.
+
+Breadthfirst search runs on graphs. It can help answer two types of questions:
+- Question type 1: Is there a path from node A to node B?
+- Question type 2: What is the shortest path from node A to node B?
+
+Suppose you’re in San Francisco, and you want to go from Twin Peaks to the Golden Gate Bridge. You want to get there by bus, with the minimum number of transfers. Here are your options:
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d8e706af-0492-4ec7-894c-13ea3359253d">
+
+The shortest route to the bridge is three steps long.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/8de8c1ec-f204-42d5-b96b-25a0c31ed2ec">
+
+To figure out how to get from Twin Peaks to the Golden Gate Bridge, there are two steps:
+1. Model the problem as a graph.
+2. Solve the problem using breadth-first search.
+
+### Queues
+The queue is called a FIFO data structure: First In, First Out. In contrast, a stack is a LIFO data structure: Last In, First Out.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/10e0c5c9-c52a-43e7-957c-1bc1d05df7f5">
+
+### Example 1: Find the mango seller
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a25a51f7-c1bc-4b35-9b8c-fe9fcd09b0ba">
+
+You want to find the mango seller using breadth-first search.
+
+To implement the graph in code, you can use a data structure that lets you express relationships: a **hash table**!
+
+Here's how it looks like in Python
+```py
+graph = {}
+graph[“you”] = [“alice”, “bob”, “claire”]
+# Notice that in a directed graph like this, you only put names that have arrow directed towards them.
+graph[“bob”] = [“anuj”, “peggy”]
+graph[“alice”] = [“peggy”]
+graph[“claire”] = [“thom”, “jonny”]
+graph[“anuj”] = []
+graph[“peggy”] = []
+graph[“thom”] = []
+graph[“jonny”] = []
+```
+
+This is how you'll implement the search
+
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/7f9d681a-de93-4d05-8fa2-8ed98dd9f8eb">
+
+Here's how the search looks like in Python
+```py
+def search(name):
+  search_queue = deque()
+  search_queue += graph[name] 
+  searched = [] # This array is how you keep track of which people you’ve searched before.
+  while search_queue:
+    person = search_queue.popleft() 
+    if not person in searched: # Only search this person if you haven’t already searched them.
+      if person_is_seller(person):
+        print person + “ is a mango seller!”
+        return True
+      else:
+        search_queue += graph[person] 
+      searched.append(person) # Marks this person as searched
+  return False
+
+search(“you”)
+```
+
+Implementation of this in C# looks like below
+https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/tests/Algorithms.UnitTests/Search/BreadthFirstSearcherTests.cs#L7-L31
+
+https://github.com/akhanalcs/algorithms/blob/2840b0dadc78341292e2d349653045b5bfff3e3d/src/Algorithms/Search/BreadthFirstSearcher.cs#L3-L39
+
+#### Running time
+If you search your entire network for a mango seller, that means you’ll follow each edge (remember, an edge is the arrow or connection from one person to another). So the running time is at least $O(number of edges)$.
+
+You also keep a queue of every person to search. Adding one person to the queue takes constant time: $O(1)$. Doing this for every person will take $O(number of people)$ total. Breadth-first search takes $O(number of people + number of edges)$, and it’s more commonly written as $O(V+E)$. $V$ for number of vertices, $E$ for number of edges.
+
+### Dependency
+Arrow is pointed towards a dependency.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/e185cd90-a44c-4ea8-88b7-c8c4fb2df896">
+
+It tells you that I can’t eat breakfast until I’ve brushed my teeth. So “eat breakfast” depends on “brush teeth”.
+
+On the other hand, showering doesn’t depend on brushing my teeth, because I can shower before I brush my teeth. 
+
+From this graph, you can make a list of the order in which I need to do my morning routine:
+
+| 1. Wake up | 1. Wake up |
+|:---|:---|
+| **2. Shower** | **2. Brush teeth** |
+| **3. Brush teeth** | **3. Shower** |
+| **4. Eat breakfast** | **4. Eat breakfast** |
+
+If task A (Shower) depends on task B (Wake up), task A shows up later in the list.
+
+Dependent (Shower) always shows up later because the dependency (Wake up) needs to be resolved first.
+
+Node where the arrow HEAD is pointed to, will always appear first. Like how HEAD is at the top of our body.
+
+### Tree
+A tree is a special type of graph, where no edges ever point back.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/4fe22e05-a49e-4046-9ec2-1ae275fe8b08">
+
+## Dijkstra's algorithm (finds the path with smallest total weight)
+Compare it to BFS (which finds the path with fewest segments)
+
+| Use Dijkstra's algorithm | Use Breadth first search algorithm |
+|---|---|
+| <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/346ada37-1a62-4be0-919e-2405b9a21b1e"> | <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/21cd612c-9672-43f0-826d-2258888c9308"> |
+
+Dijkstra’s algorithm has four steps:
+1. Find the cheapest node. This is the node you can get to in the least amount of time.
+2. Check whether there’s a cheaper path to the neighbors of this node. If so, update their costs.
+3. Repeat until you’ve done this for every node in the graph.
+4. Calculate the final path.
+
+For eg:
+
+Imagine you have a book, and you want trade it for a piano. Your friends Alex, Amy and Beethoven are willing to trade various items.
+
+How are you going to figure out the path from the book to the piano where you spend the least amount of money? 
+
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/551768fa-2e4f-4388-836d-15086d6524ed">
+
+| Parent<br>(When cost<br>updates, you<br>get a parent) | Node | Standing at Book<br>(only neighbors<br>of Book updated)<br><br>Cost 1 | Standing at Poster<br>(only neighbors<br>of Poster updated)<br><br>Cost 2 | Standing at LP<br>(only neighbors<br>of LP updated)<br><br>Cost 3 | Standing at Guitar<br>(only neighbors<br>of Guitar updated)<br><br>Cost 4 | Standing at Drumset<br>(only neighbors<br>of Drumset updated)<br><br>Cost 5 |
+|---|---|---|---|---|---|---|
+| Book | LP | $5$<br>💥 Updated | $5$<br>^^^^ C2W 🏆 | $5$ | $5$ | $5$ |
+| Book | Poster | $0$<br>💥 Updated<br>^^^^ C1W 🏆 | $0$ | $0$ | $0$ | $0$ |
+| Poster -> LP | Guitar | $∞$ | C1W + $30$ = $30$<br>💥 Updated | C2W + $15$ = $20$<br>💥 Updated<br>^^^^ C3W 🏆 | $20$ | $20$ |
+| Poster -> LP | Drumset | $∞$ | C1W + $35$ = $35$<br>💥 Updated | C2W + $20$ = $25$<br>💥 Updated | $25$<br>^^^^ C4W 🏆 | $25$ |
+| Guitar -> Drumset | Piano | $∞$ | $∞$ | $∞$ | C3W + $20$ = $40$<br>💥 Updated | C4W + $10$ = $35$<br>💥 Updated<br>^^^^ C5W 🏆 |
+|  |  | At this point:<br>✅ Book | At this point:<br>✅ Book<br>✅ Poster | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar | At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar<br>✅ Drumset |
+
+At this point, you've run Dijkstra's algorithm for every node (you don't need to run it for the finish node).
+
+Now you know that the shortest/ cheapest path costs $35. Let's figure out the path.
+
+Piano has Drumset as parent, so you trade Drumset for Piano. And Drumset has LP as parent. And LP has Book as parent.
+
+So here's the series of trades you'll need to make:
+
+<img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/154a3381-7820-49ea-99f6-8739c740a3c1">
 
 
 
 
+### Weighted graphs vs Unweighted graphs
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/37df2b0d-7667-4ecc-a28d-40d5a9618254">
 
+To calculate the **shortest path** in an **unweighted** graph, use **breadth-first search**. To calculate the **shortest path** in a **weighted** graph, use **Dijkstra’s algorithm**.
+
+### Directed graphs vs undirected graphs
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d2416cb5-f3c0-4675-b4cf-d13e30840e19">
+
+An undirected graph means that both nodes point to each other. That’s a cycle!
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/ecc65ddf-407c-4bde-aa93-6e0345182525">
+
+With an undirected graph, each edge adds another cycle. Dijkstra's algorithm works even if there is a cycle, as long as it is a positive weight cycle.
 
 
