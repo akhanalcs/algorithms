@@ -1,6 +1,11 @@
 # algorithms
 Refeshing Algorithms from Computer Science days.
 
+
+
+
+
+
 ## Helpful links
 1. [Data Structures and Algorithms in C#](https://dev.to/adavidoaiei/fundamental-data-structures-and-algorithms-in-c-4ocf)
 
@@ -466,6 +471,8 @@ If task A (Shower) depends on task B (Wake up), task A shows up later in the lis
 
 Dependent (Shower) always shows up later because the dependency (Wake up) needs to be resolved first.
 
+Node where the arrow HEAD is pointed to, will always appear first. Like how HEAD is at the top of our body.
+
 ### Tree
 A tree is a special type of graph, where no edges ever point back.
 
@@ -474,7 +481,129 @@ A tree is a special type of graph, where no edges ever point back.
 ## Dijkstra's algorithm (finds the path with smallest total weight)
 Compare it to BFS (which finds the path with fewest segments)
 
-<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d852c3b0-ac97-4d6b-9b8f-71b0d301c77b">
+| Use Dijkstra's algorithm | Use Breadth first search algorithm |
+|---|---|
+| <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/346ada37-1a62-4be0-919e-2405b9a21b1e"> | <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/21cd612c-9672-43f0-826d-2258888c9308"> |
+
+Dijkstra’s algorithm has four steps:
+1. Find the cheapest node. This is the node you can get to in the least amount of time.
+2. Check whether there’s a cheaper path to the neighbors of this node. If so, update their costs.
+3. Repeat until you’ve done this for every node in the graph.
+4. Calculate the final path.
+
+For eg:
+
+<img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/acd2f5f8-3098-41e4-a116-cc1d5dc634c9">
+
+1. Step 1: Find the cheapest node by standing at the start.
+   | Node | Time To Node |
+   |---|---|
+   | A | $6$ |
+   | B | $2$ |
+   | Finish | $∞$ |
+
+   B is the cheapest node.
+
+2. Step 2: Calculate how long it takes to get to all of node B's neighbors by following an edge **from** B.
+   | Node | Time To Node |
+   |---|---|
+   | A | $5$ |
+   | B | $2$ |
+   | Finish | $7$ |
+
+3. Step 1 again: Find the node that takes the least amount of time to get to. You're done with node B, so node A has the next smallest time estimate. 
+   | Node | Time To Node |
+   |---|---|
+   | A | $5$ |
+   | B | $2$ |
+   | Finish | $7$ |
+
+4. Step 2 again: Update the costs for node A's neighbors.
+   | Node | Time To Node |
+   |---|---|
+   | A | $5$ |
+   | B | $2$ |
+   | Finish | $6$ |
+
+   At this point, you've run Dijkstra's algorithm for every node (you don't need to run it for the finish node).
+
+<img width="250" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/25671db7-d3f3-4f43-a69b-8b393f78328f">
+
+Another example:
+
+<div style="overflow-x:scroll;">
+<table style="table-layout:fixed; width:100%;">
+<thead>
+  <tr>
+    <th width="200px">Parent<br>(When cost<br>updates, you<br>get a parent)</th>
+    <th width="100px">Node</th>
+    <th width="200px">Standing at Book<br>(only neighbors<br>of Book updated)<br><br>Cost 1</th>
+    <th width="200px">Standing at Poster<br>(only neighbors<br>of Poster updated)<br><br>Cost 2</th>
+    <th width="200px">Standing at LP<br>(only neighbors<br>of LP updated)<br><br>Cost 3</th>
+    <th width="200px">Standing at Guitar<br>(only neighbors<br>of Guitar updated)<br><br>Cost 4</th>
+    <th width="200px">Standing at Drumset<br>(only neighbors<br>of Drumset updated)<br><br>Cost 5</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Book</td>
+    <td>LP <br><br>Upd--&gt;</td>
+    <td>$5$<br><br>Updated, so Book is<br>set as parent</td>
+    <td>$5$<br><br>^^^^C2W<br></td>
+    <td>$5$</td>
+    <td>$5$</td>
+    <td>$5$</td>
+  </tr>
+  <tr>
+    <td>Book</td>
+    <td>Poster <br><br>Upd--&gt;</td>
+    <td>$0$<br><br>^^^^ C1W<br><br>Updated, so Book is<br>set as parent</td>
+    <td>$0$</td>
+    <td>$0$</td>
+    <td>$0$</td>
+    <td>$0$</td>
+  </tr>
+  <tr>
+    <td>Poster -&gt; LP</td>
+    <td>Guitar</td>
+    <td>$∞$<br><br>Upd--&gt;</td>
+    <td>C1W + $30$ = $30$<br><br><br>Updated, so Poster is<br>set as parent<br><br>Upd--&gt;</td>
+    <td>C2W + $15$ = $20$<br><br>^^^^ C3W<br><br>Updated, so LP is<br>set as parent</td>
+    <td>$20$</td>
+    <td>$20$</td>
+  </tr>
+  <tr>
+    <td>Poster -&gt; LP</td>
+    <td>Drumset</td>
+    <td>$∞$ <br><br>Upd--&gt;</td>
+    <td>C1W + $35$ = $35$<br><br><br>Updated, so Poster is<br>set as parent<br><br>Upd--&gt;</td>
+    <td>C2W + $20$ = $25$<br><br>Updated, so LP is<br>set as parent</td>
+    <td>$25$<br><br>^^^^ C4W</td>
+    <td>$25$</td>
+  </tr>
+  <tr>
+    <td>Guitar -&gt; Drumset</td>
+    <td>Piano</td>
+    <td>$∞$</td>
+    <td>$∞$</td>
+    <td>$∞$ <br><br>Upd--&gt;</td>
+    <td>C3W + $20$ = $40$<br><br>Updated, so Guitar<br>is set as parent<br><br>Upd--&gt;</td>
+    <td>C4W + $10$ = $35$<br><br>^^^^ C5W<br><br>Updated, so Drumset<br>is set as parent</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>At this point:<br>✅ Book</td>
+    <td>At this point:<br>✅ Book<br>✅ Poster</td>
+    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP</td>
+    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar</td>
+    <td>At this point:<br>✅ Book<br>✅ Poster<br>✅ LP<br>✅ Guitar<br>✅ Drumset</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
 
 ### Weighted graphs vs Unweighted graphs
 <img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/37df2b0d-7667-4ecc-a28d-40d5a9618254">
@@ -488,6 +617,6 @@ An undirected graph means that both nodes point to each other. That’s a cycle!
 
 <img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/ecc65ddf-407c-4bde-aa93-6e0345182525">
 
-With an undirected graph, each edge adds another cycle. Dijkstra’s algorithm only works with directed acyclic graphs, called DAGs for short.
+With an undirected graph, each edge adds another cycle. Dijkstra's algorithm works even if there is a cycle, as long as it is a positive weight cycle.
 
 
