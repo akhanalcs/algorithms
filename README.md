@@ -480,6 +480,21 @@ Compare it to BFS (which finds the path with fewest segments)
 |---|---|
 | <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/346ada37-1a62-4be0-919e-2405b9a21b1e"> | <img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/21cd612c-9672-43f0-826d-2258888c9308"> |
 
+### Weighted graphs vs Unweighted graphs
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/37df2b0d-7667-4ecc-a28d-40d5a9618254">
+
+To calculate the **shortest path** in an **unweighted** graph, use **breadth-first search**. To calculate the **shortest path** in a **weighted** graph, use **Dijkstra’s algorithm**.
+
+### Directed graphs vs undirected graphs
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d2416cb5-f3c0-4675-b4cf-d13e30840e19">
+
+An undirected graph means that both nodes point to each other. That’s a cycle!
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/ecc65ddf-407c-4bde-aa93-6e0345182525">
+
+With an undirected graph, each edge adds another cycle. Dijkstra's algorithm works even if there is a cycle, as long as it is a positive weight cycle.
+
+### Example
 Dijkstra’s algorithm has four steps:
 1. Find the cheapest node. This is the node you can get to in the least amount of time.
 2. Check whether there’s a cheaper path to the neighbors of this node. If so, update their costs.
@@ -513,21 +528,44 @@ So here's the series of trades you'll need to make:
 
 <img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/154a3381-7820-49ea-99f6-8739c740a3c1">
 
+### Negative weight edges
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a1e6eb83-ce94-4bb9-a46c-359ccf51efa1">
 
+Imagine that Rama wants to get Drums.
 
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/c29c54df-96b1-49b6-8599-91dd9656a3f6">
 
-### Weighted graphs vs Unweighted graphs
-<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/37df2b0d-7667-4ecc-a28d-40d5a9618254">
+The second path costs him $2 less, so he should take that path, right?  
+Well, guess what? If you run Dijkstra’s algorithm on this graph, Rama will take the wrong path. He’ll take the longer path. 
 
-To calculate the **shortest path** in an **unweighted** graph, use **breadth-first search**. To calculate the **shortest path** in a **weighted** graph, use **Dijkstra’s algorithm**.
+You can’t use Dijkstra’s algorithm if you have negative-weight edges. Negative-weight edges break the algorithm.
 
-### Directed graphs vs undirected graphs
-<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d2416cb5-f3c0-4675-b4cf-d13e30840e19">
+If you want to find the shortest path in a graph that has negative-weight edges, there’s an algorithm for that! It’s called the **Bellman-Ford** algorithm.
 
-An undirected graph means that both nodes point to each other. That’s a cycle!
+### Implementation
+<img width="250" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d33784cd-5900-45da-a109-6e6be8270068">
 
-<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/ecc65ddf-407c-4bde-aa93-6e0345182525">
+To code this example, you’ll need three hash tables: Graph, costs and parents.
 
-With an undirected graph, each edge adds another cycle. Dijkstra's algorithm works even if there is a cycle, as long as it is a positive weight cycle.
+<img width="500" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/569b896c-4c01-4d4b-8de8-8bb0705c83f3">
+
+To implement the **graph**, store the **neighbors** and the **cost** for getting to that neighbor.
+For eg:
+https://github.com/akhanalcs/algorithms/blob/733e35e9c503a99c2f3c89b06a7518a01f2395f9/tests/Algorithms.UnitTests/Greedy/DijkstraAlgorithmTests.cs#L19-L26
+
+Next you need a hash table to store the **costs** for each node. For example.
+https://github.com/akhanalcs/algorithms/blob/733e35e9c503a99c2f3c89b06a7518a01f2395f9/tests/Algorithms.UnitTests/Greedy/DijkstraAlgorithmTests.cs#L11-L17
+
+You also need another hash table for the **parents**.
+https://github.com/akhanalcs/algorithms/blob/733e35e9c503a99c2f3c89b06a7518a01f2395f9/tests/Algorithms.UnitTests/Greedy/DijkstraAlgorithmTests.cs#L28-L34
+
+Finally, you need an array to keep track of all the nodes you’ve already **processed**, because you don’t need to process a node more than once
+https://github.com/akhanalcs/algorithms/blob/733e35e9c503a99c2f3c89b06a7518a01f2395f9/src/Algorithms/Greedy/DijkstraAlgorithm.cs#L9-L10
+
+The algorithm looks like this
+
+<img width="350" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/16e39a00-c18f-4dd8-97cf-1951f1f5aed1">
+
+Check out the code to see how I've implemented it in `.NET 8`.
 
 
