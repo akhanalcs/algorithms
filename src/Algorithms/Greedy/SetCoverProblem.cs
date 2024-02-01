@@ -8,7 +8,7 @@ public static class SetCoverProblem
     // For eg: U = {1, 2, 3, 4, 5} and S = { {1, 2, 3}, {2, 4}, {3, 4}, {4, 5} }
     // Clearly the union of S is U. However, we can cover all elements with only two sets: { {1, 2, 3}, {4, 5} }.
     // Therefore, the solution to the set cover problem has size 2.
-    public static HashSet<string> Cover(HashSet<string> universe, Dictionary<string, HashSet<string>> subsets)
+    public static IEnumerable<string> Cover()
     {
         var statesNeeded = new HashSet<string> { "mt", "wa", "or", "id", "nv", "ut", "ca", "az" };
         var stations = new Dictionary<string, HashSet<string>>
