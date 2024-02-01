@@ -30,7 +30,18 @@ public static class DijkstraAlgorithm
             lowestCostUnvisitedNode = FindLowestCostUnvisitedNode(costs, visited);
         }
     }
-
+    
+    private static string? FindLowestCostUnvisitedNode(Dictionary<string, int> costs, HashSet<string> visited)
+    {
+        return costs
+            .Where(node => !visited.Contains(node.Key))
+            .OrderBy(node => node.Value)
+            // When .Where above returns empty collection, this will give default KeyValuePair: { Key = null, Value = 0 }
+            .FirstOrDefault()
+            .Key;
+    }
+    
+    // Not needed for the algorithm though
     public static string ConstructFinalRoute(Dictionary<string, string?> parents)
     {
         var route = new List<string>();
@@ -45,15 +56,5 @@ public static class DijkstraAlgorithm
 
         route.Reverse();
         return string.Join("=>", route);
-    }
-    
-    private static string? FindLowestCostUnvisitedNode(Dictionary<string, int> costs, HashSet<string> visited)
-    {
-        return costs
-            .Where(node => !visited.Contains(node.Key))
-            .OrderBy(node => node.Value)
-            // When .Where above returns empty collection, this will give default KeyValuePair: { Key = null, Value = 0 }
-            .FirstOrDefault()
-            .Key;
     }
 }
