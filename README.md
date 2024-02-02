@@ -609,7 +609,13 @@ Suppose you’re going to London for a nice vacation. You have two days there an
 
 <img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/5295a8e0-d804-42c7-926d-69bda3dae5d3">
 
-Can you figure out what you should see, based on this list? Draw the dynamic-programming grid for this list.
+Can you figure out what you should see, based on this list? 
+
+Draw the dynamic-programming grid for this list.
+
+Note: The formula looks intimidating, but it's quite intuitive, which I've explained in the grid below.
+
+$cell[i][j] = \max(\text{Previous Max: Value at } cell[i-1][j], \text{Value of current item + value of remaining space: }cell[i-1][j-\text{item's weight}])$
 
 | <br>_________________ | 1/2 day<br>________ | 1 day<br>___________________________ | 1 1/2 day<br>___________________________ | 2 days<br>___________________________ |
 |---|---|---|---|---|
@@ -618,6 +624,11 @@ Can you figure out what you should see, based on this list? Draw the dynamic-pro
 | National Gallery<br>Time: 1 day<br>Rating: 9 | $7$ _(2,0)_<br><br><br><br><br><br><br><br><br><br><br>W | $13$ _(2,1)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + 0)<br>= 13<br><br><br><br><br>GW | $16$ _(2,2)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + (1.5 day - 1 day))<br>= MAX (13, 9 + value at (1,0))<br>= MAX (13, 9 + 7)<br>= MAX (13, 16)<br>= 16<br><br>NW | $22$ _(2,3)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + (2 days - 1 day))<br>= MAX (13, 9 + value at (1,1))<br>= MAX (13, 9 + 13)<br>= MAX (13, 22)<br>= 22<br><br>NGW |
 | British Museum<br>Time: 2 days<br>Rating: 9 | $7$ _(3,0)_<br><br>W | $13$ _(3,1)_<br><br>GW | $16$ _(3,2)_<br><br>NW | $22$ _(3,3)_<br><br>NGW |
 | St. Paul's Cathedral<br>Time: 1/2 day<br>Rating: 8 | $8$ _(4,0)_<br><br>S | $15$ _(4,1)_<br><br>SW | $21$ _(4,2)_<br><br>SGW | $24$ _(4,3)_<br><br>SNW |
+
+Final answer:
+- St. Paul's Cathedral
+- National Gallery
+- Westminster Abbey
 
 
 
