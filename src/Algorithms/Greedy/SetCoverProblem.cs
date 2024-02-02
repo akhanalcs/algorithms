@@ -27,13 +27,14 @@ public static class SetCoverProblem
             var bestStation = "";
             var statesCovered = new HashSet<string>();
 
+            // Go through every station and pick the one that covers the most uncovered states (bestStation).
             foreach (var station in stations)
             {
                 var covered = new HashSet<string>(station.Value.Intersect(statesNeeded));
                 if (covered.Count > statesCovered.Count)
                 {
                     bestStation = station.Key;
-                    statesCovered = covered;
+                    statesCovered = covered; // Set of all the states this station covers that haven’t been covered yet
                 }
             }
 
