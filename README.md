@@ -568,4 +568,58 @@ The algorithm looks like this
 
 Check out the code to see how I've implemented it in `.NET 8`.
 
+## Greedy Algorithms
+### Set covering problem
+Given a set of elements ${1, 2, …, n}$ (called the universe) and a collection $S$ of $m$ subsets whose union equals the universe, the set cover problem is to identify the smallest sub-collection of $S$ whose union equals the universe. For example, consider the universe $U = {1, 2, 3, 4, 5}$ and the collection of sets $S = { {1, 2, 3}, {2, 4}, {3, 4}, {4, 5} }$. Clearly the union of $S$ is $U$. However, we can cover all elements with only two sets: ${ {1, 2, 3}, {4, 5} }$. Therefore, the solution to the [set cover problem](https://en.wikipedia.org/wiki/Set_cover_problem) has size 2.
+
+**Example:**
+
+Suppose you’re starting a radio show. You want to reach listeners in all 8 states. You have to decide what stations to play on to reach all those listeners. It costs money to be on each station, so you’re trying to minimize the number of stations you play on. 
+
+<p align="left">
+  <img width="210" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a0c9184e-e923-48d6-89a1-340b779b18bd">
+&nbsp;
+  <img width="234" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/605f8b67-6df2-467f-903e-ac13b49c4f0a">
+</p>
+
+Check out the code to see how I've implemented it in `.NET 8`.
+
+### NP Complete (Page 159)
+Some problems are famously hard to solve. The traveling salesperson and the set-covering problem are two examples. A lot of smart people think that it’s not possible to write an algorithm that will solve these problems quickly.
+
+That's why we solve them by approximating using Greedy algorithms.
+
+There’s no easy way to tell if the problem you’re working on is NP-complete. 
+
+Here are some giveaways:
+- Your algorithm runs quickly with a handful of items but really slows down with more items.
+- “All combinations of X” usually point to an NP-complete problem.
+- Do you have to calculate “every possible version” of X because you can’t break it down into smaller sub-problems? Might be NP-complete.
+- If your problem involves a sequence (such as a sequence of cities, like traveling salesperson), and it’s hard to solve, it might be NP-complete.
+- If your problem involves a set (like a set of radio stations) and it’s hard to solve, it might be NP-complete.
+- Can you restate your problem as the set-covering problem or the traveling-salesperson problem? Then your problem is definitely 
+NP-complete.
+
+## Dynamic Programming (Page 161)
+Dynamic programming starts by solving subproblems and builds up to solving the big problem.
+
+### Knapsack problem
+#### Example: Optimizing your travel itinerary
+Suppose you’re going to London for a nice vacation. You have two days there and a lot of things you want to do. You can’t do everything, so you make a list.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/5295a8e0-d804-42c7-926d-69bda3dae5d3">
+
+Can you figure out what you should see, based on this list? Draw the dynamic-programming grid for this list.
+
+| <br>_________________ | 1/2 day<br>________ | 1 day<br>___________________________ | 1 1/2 day<br>___________________________ | 2 days<br>___________________________ |
+|---|---|---|---|---|
+| Westminster Abbey<br>Time: 1/2 day<br>Rating: 7 | $7$ _(0,0)_<br><br>W | $7$ _(0,1)_<br><br>W | $7$ _(0,2)_<br><br>W | $7$ _(0,3)_<br><br>W |
+| Globe Theater<br>Time: 1/2 day<br>Rating: 6 | $7$ _(1,0)_<br><br><br><br><br><br><br><br><br><br><br>W | $13$ _(1,1)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (7, 6 + (1 day - 1/2 day))<br>= MAX (7, 6 + value at (0,0))<br>= MAX (7, 6 + 7)<br>= MAX (7, 13)<br>= 13<br><br>GW | $13$ _(1,2)_<br><br><br><br><br><br><br><br><br><br><br>GW | $13$ _(1,3)_<br><br><br><br><br><br><br><br><br><br><br>GW |
+| National Gallery<br>Time: 1 day<br>Rating: 9 | $7$ _(2,0)_<br><br><br><br><br><br><br><br><br><br><br>W | $13$ _(2,1)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + 0)<br>= 13<br><br><br><br><br>GW | $16$ _(2,2)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + (1.5 day - 1 day))<br>= MAX (13, 9 + value at (1,0))<br>= MAX (13, 9 + 7)<br>= MAX (13, 16)<br>= 16<br><br>NW | $22$ _(2,3)_<br><br>= MAX (Prev Max:Right above it,<br>Current rating + Remaining day<br>rating)<br>= MAX (13, 9 + (2 days - 1 day))<br>= MAX (13, 9 + value at (1,1))<br>= MAX (13, 9 + 13)<br>= MAX (13, 22)<br>= 22<br><br>NGW |
+| British Museum<br>Time: 2 days<br>Rating: 9 | $7$ _(3,0)_<br><br>W | $13$ _(3,1)_<br><br>GW | $16$ _(3,2)_<br><br>NW | $22$ _(3,3)_<br><br>NGW |
+| St. Paul's Cathedral<br>Time: 1/2 day<br>Rating: 8 | $8$ _(4,0)_<br><br>S | $15$ _(4,1)_<br><br>SW | $21$ _(4,2)_<br><br>SGW | $24$ _(4,3)_<br><br>SNW |
+
+
+
+
 
