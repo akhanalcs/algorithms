@@ -631,19 +631,4 @@ Final answer:
 - Westminster Abbey
 
 #### Example: Optimizing your travel packing
-Suppose you’re going camping. You have a knapsack that holds 6 lb, and you can take the following items. They each have a value, and the higher the value, the more important the item is:
-1. Water, 3 lb, 10
-2. Book, 1 lb, 3 
-3. Food, 2 lb, 9 
-4. Jacket, 2 lb, 5 
-5. Camera, 1 lb, 6
-
-What’s the optimal set of items to take on your camping trip? Draw the dynamic-programming grid for this list.
-
-| <br>__________ | 1 lb<br>________ | 2 lb<br>___________________________ | 3 lb<br>___________________________ | 4 lb<br>___________________________ | 5 lb<br>___________________________ | 6 lb<br>___________________________ |
-|---|---|---|---|---|---|---|
-| WATER<br>Weight: 3 lb<br>Value: 10 | 0 _(0,0)_ | 0 _(0,1)_<br> | 10 _(0,2)_<br><br>W | 10 _(0,3)_<br><br>W | 10 _(0,4)_<br><br>W | 10 _(0,5)_<br><br>W |
-| BOOK<br>Weight: 1 lb<br>Value: 3 | 3 _(1,0)_<br><br>B | 3 _(1,1)_<br><br>B | 10 _(1,2)_<br><br>W | 13 _(1,3)_<br><br>BW | 13 _(1,4)_<br><br>BW | 13 _(1,5)_<br><br>BW |
-| FOOD<br>Weight: 2 lb<br>Value: 9 | 3 _(2,0)_<br><br><br><br><br><br><br><br><br><br><br>B | 9 _(2,1)_<br><br>= MAX (Prev Max:Right above it,<br>Current value + Remaining space<br>value)<br>= MAX (3, 9 + 0)<br>= 9<br><br><br><br><br>F | 12 _(2,2)_<br><br>= MAX (Prev Max:Right above it,<br>Current value + Remaining space<br>value)<br>= MAX (10, 9 + (3 lb - 2 lb))<br>= MAX (10, 9 + value at (1,0))<br>= MAX (10, 9 + 3)<br>= MAX (10, 12)<br>= 12<br><br>FB | 13 _(2,3)_<br><br>= MAX (Prev Max:Right above it,<br>Current value + Remaining space<br>value)<br>= MAX (13, 9 + (4 lb - 2 lb))<br>= MAX (13, 9 + value at (1,1))<br>= MAX (13, 9 + 3)<br>= MAX (13, 12)<br>= 13<br><br>BW | 19 _(2,4)_<br><br>= MAX (Prev Max:Right above it,<br>Current value + Remaining space<br>value)<br>= MAX (13, 9 + (5 lb - 2 lb))<br>= MAX (13, 9 + value at (1,2))<br>= MAX (13, 9 + 10)<br>= MAX (13, 19)<br>= 19<br><br>FW | 22 _(2,5)_<br><br>= MAX (Prev Max:Right above it,<br>Current value + Remaining space<br>value)<br>= MAX (13, 9 + (6 lb - 2 lb))<br>= MAX (13, 9 + value at (1,3))<br>= MAX (13, 9 + 13)<br>= MAX (13, 22)<br>= 22<br><br>FBW |
-| JACKET<br>Weight: 2 lb<br>Value: 5 | 3 _(3,0)_<br><br>B | 9 _(3,1)_<br><br>F | 12 _(3,2)_<br><br>FB | 14 _(3,3)_<br><br>FJ | 19 _(3,4)_<br><br>FW | 22 _(3,5)_<br><br>FBW |
-| CAMERA<br>Weight: 1 lb<br>Value: 6 | 6 _(4,0)_<br><br>C | 9 _(4,1)_<br><br>F or BC? Which one do I pick? | 15 _(4,2)_<br><br>FC | 18 _(4,3)_<br><br>FBC | 20 _(4,4)_<br><br>FJC | 25 _(4,5)_<br><br>FWC |
+Check out [my answer on StackOverflow](https://stackoverflow.com/a/77933874/8644294).
