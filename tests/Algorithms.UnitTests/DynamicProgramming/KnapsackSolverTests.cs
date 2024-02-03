@@ -11,11 +11,11 @@ public class KnapsackSolverTests
         var maxCapacity = 6;
         Item[] items =
         [
-            new Item("Water", 3, 10),
-            new Item("Book", 1, 3),
-            new Item("Food", 2, 9),
-            new Item("Jacket", 2, 5),
-            new Item("Camera", 1, 6)
+            new("Water", 3, 10),
+            new("Book", 1, 3),
+            new("Food", 2, 9),
+            new("Jacket", 2, 5),
+            new("Camera", 1, 6)
         ];
         
         // Act

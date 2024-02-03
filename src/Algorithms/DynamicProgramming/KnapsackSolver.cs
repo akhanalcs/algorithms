@@ -17,14 +17,10 @@ public static class KnapsackSolver
                 if (row == 0)
                 {
                     if (items[row].Weight <= capacity)
-                    {
                         grid[row, capacity] = new GridCell(items[row].Value, [items[row]]);
-                    }
                     else
-                    {
                         // The first column has no capacity, so [i=0,j=0] will bring you here
                         grid[row, capacity] = new GridCell(0, []);
-                    }
                 }
                 // For the rest of the rows
                 // The item fits
