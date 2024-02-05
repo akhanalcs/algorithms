@@ -603,6 +603,13 @@ NP-complete.
 ## Dynamic Programming (Page 161)
 Dynamic programming starts by solving subproblems and builds up to solving the big problem.
 
+- Dynamic programming is useful when you’re trying to optimize something given a constraint. 
+- You can use dynamic programming when the problem can be broken into discrete subproblems.
+- Every dynamic-programming solution involves a grid.
+- The values in the cells are usually what you’re trying to optimize.
+- Each cell is a subproblem, so think about how you can divide your problem into subproblems.
+- There’s no single formula for calculating a dynamic-programming solution.
+
 ### Knapsack problem
 #### Example: Optimizing your travel itinerary
 Suppose you’re going to London for a nice vacation. You have two days there and a lot of things you want to do. You can’t do everything, so you make a list.
@@ -632,3 +639,53 @@ Final answer:
 
 #### Example: Optimizing your travel packing
 Check out [my answer on StackOverflow](https://stackoverflow.com/a/77933874/8644294).
+
+### Longest common substring
+Suppose you run dictionary.com. Someone types in a word, and you give them the definition. 
+But if someone misspells a word, you want to be able to guess what word they meant. Alex is searching for _fish_, but he accidentally put in _hish_. That’s not a word in your dictionary, but you have a list of words that are similar, like: _fish_, _vista_ etc.
+
+Which word did Alex mean to type: _fish_ or _vista_? 
+
+Start with the grids: 
+- Fish  
+  <img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a7345283-212c-4a7a-8c35-9ffd33b80c85">
+- Vista
+  <img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/034d03c4-3db1-4049-bf12-141b5158d20d">
+
+_hish_ and _fish_ have a substring of three letters in common. _hish_ and _vista_ have a substring of two letters in common.  
+Alex probably meant to type _fish_.
+
+#### Formula
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/d364aa2c-2635-44bf-a8f2-751597c09dfa">
+
+```py
+if word_a[i] == word_b[j]:           # The letters match
+ cell[i][j] = cell[i-1][j-1] + 1
+else:                                # The letters don’t match
+ cell[i][j] = 0 
+```
+
+#### C# Implementation
+Example of this in C# is well documented [here](https://stackoverflow.com/a/77942555/8644294).
+
+### Longest common subsequence
+Is the number of letters in a sequence that the two words have in common.
+
+Suppose Alex accidentally searched for _fosh_. Which word did he mean: _fish_ or _fort_?
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/1af6353f-2bbe-42e2-be17-d0906fe8a1cc">
+
+Alex probably meant to type _fish_.
+#### Formula
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/6e300ccd-eea8-4850-b12c-b1327a294127">
+
+```py
+if word_a[i] == word_b[j]:                      # The letters match.
+ cell[i][j] = cell[i-1][j-1] + 1
+else:                                           # The letters don’t match.
+ cell[i][j] = max(cell[i-1][j], cell[i][j-1])
+```
+(3,3)=>(2,2)=>(2,1)=>(1,1)
+
+#### C# Implementation
+Example of this in C# is well documented [here](https://stackoverflow.com/a/77944515/8644294).
