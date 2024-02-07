@@ -34,4 +34,45 @@ public static class LongestCommonSubstring
 
         return grid;
     }
+
+    public static string GetLongestCommonSubstring(Cell[,] grid, Cell maxCell, int maxRow, int maxCol)
+    {
+        var lcs = new Stack<char>();
+        
+        // Go back diagonally until there's a break
+        while (maxCell.Character is not null)
+        {
+            lcs.Push(maxCell.Character.Value);
+            maxRow--;
+            maxCol--;
+            maxCell = grid[maxRow, maxCol];
+        }
+
+        return new string(lcs.ToArray());
+    }
+
+    public static (Cell MaxCell, int MaxRow, int MaxCol) GetMaxCell(Cell[,] grid)
+    {
+        int maxRow = 0, maxCol = 0;
+        var maxCell = grid[maxRow, maxCol];
+        var gridRows = grid.GetLength(0);
+        var gridCols = grid.GetLength(1);
+
+        // Find the max cell and its location
+        // You only have to go through the words' length portion of the original grid.  For eg: (1,1) to (noOfGridRows-1,noOfGridCols-1)
+        for (var row = 1; row <= gridRows - 1; row++)
+        {
+            for (var col = 1; col <= gridCols - 1; col++)
+            {
+                if (grid[row, col].Value > maxCell.Value)
+                {
+                    maxCell = grid[row, col];
+                    maxRow = row;
+                    maxCol = col;
+                }
+            }
+        }
+
+        return (maxCell, maxRow, maxCol);
+    }
 }

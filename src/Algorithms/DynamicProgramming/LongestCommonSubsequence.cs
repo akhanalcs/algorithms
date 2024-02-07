@@ -39,7 +39,7 @@ public static class LongestCommonSubsequence
     {
         var lcs = new Stack<char>();
 
-        // Only go through the words' length portion of the original grid.  For eg: (noOfGridRows,noOfGridCols) to (1,1)
+        // Only go through the words' length portion of the original grid.  For eg: (noOfGridRows-1,noOfGridCols-1) to (1,1)
         // Don't go to the padded row/ column, that's why -1
         var rows = grid.GetLength(0) - 1;
         var cols = grid.GetLength(1) - 1;

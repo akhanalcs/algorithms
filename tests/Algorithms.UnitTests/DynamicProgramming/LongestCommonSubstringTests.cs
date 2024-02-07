@@ -9,16 +9,15 @@ public class LongestCommonSubstringTests
     {
         // Arrange
         const string word1 = "FISH";
-        const string word2 = "FIST";
+        const string word2 = "FOSH";
         
         // Act
         var grid = LongestCommonSubstring.Find(word1, word2);
-        var nonZeroCells = grid.Cast<Cell>().Where(c => c.Value > 0).OrderBy(c => c.Value).ToArray();
-        var substring = string.Concat(nonZeroCells.Select(c => c.Character));
-        var maxCellValue = nonZeroCells.Last().Value; // Because nonZeroCells is already ordered in ascending order
-        
+        var (maxCell, maxRow, maxCol) = LongestCommonSubstring.GetMaxCell(grid);
+        var lcs = LongestCommonSubstring.GetLongestCommonSubstring(grid, maxCell, maxRow, maxCol);
+
         // Assert
-        Assert.That(maxCellValue, Is.EqualTo(3));
-        Assert.That(substring, Is.EqualTo("FIS"));
+        Assert.That(maxCell.Value, Is.EqualTo(2));
+        Assert.That(lcs, Is.EqualTo("SH"));
     }
 }
