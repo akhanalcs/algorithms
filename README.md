@@ -757,3 +757,8 @@ The distance tells you that Priyanka’s tastes are more like Justin’s than Mo
 
 If you’re a Netflix user, Netflix will keep telling you, “Please rate more movies. The more movies you rate, the better your recommendations will be.” Now you know why. The more movies you rate, the more accurately Netflix can see what other users you’re similar to.
 
+#### Regression
+These are the two basic things you’ll do with KNN—classification and regression:
+- Classification = categorization into a group
+- Regression = predicting a response (like a number)
+
