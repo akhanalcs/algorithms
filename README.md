@@ -685,7 +685,80 @@ if word_a[i] == word_b[j]:                      # The letters match.
 else:                                           # The letters don’t match.
  cell[i][j] = max(cell[i-1][j], cell[i][j-1])
 ```
-(3,3)=>(2,2)=>(2,1)=>(1,1)
 
 #### C# Implementation
 Example of this in C# is well documented [here](https://stackoverflow.com/a/77944515/8644294).
+
+## k-nearest neighbors (page 187)
+### Classifying oranges vs grapefruit
+How would you classify this fruit? 
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a432779c-dcce-401d-91c4-0968afd098bd">
+
+One way is to look at the neighbors of this spot. Take a look at the three closest neighbors of this spot.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/a460dd99-1a42-4522-b2fb-8f4b81a4954c">
+
+More neighbors are oranges than grapefruit. So this fruit is probably an orange. 
+Congratulations: You just used the k-nearest neighbors (KNN) algorithm for classification!
+
+The KNN algorithm is simple but useful! If you’re trying to **classify** something, you might want to try KNN first.
+
+### Recommender System
+Suppose you’re Netflix, and you want to build a movie recommendations system for your users.
+
+You can plot every user on a graph.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/5166f670-89e0-4859-b5cf-b0ec2f66cbd9">
+
+These users are plotted by similarity, so users with similar taste are plotted closer together.
+
+Suppose you want to recommend movies for Priyanka. Find the five users closest to her.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/2f4e118f-7d34-469e-b32a-d3a518127a93">
+
+Justin, JC, Joey, Lance, and Chris all have similar taste in movies. So whatever movies they like, Priyanka will probably like too! 
+
+Once you have this graph, building a recommendations system is easy. If Justin likes a movie, recommend it to Priyanka.
+
+<img width="650" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/88ea3901-e102-4e38-806d-dea25a601492">
+
+You graphed the users by similarity. How do you figure out how similar two users are?
+
+#### Feature extraction
+Here’s how you can convert users into a set of numbers. When users sign up for Netflix, have them rate some categories of movies based on 
+how much they like those categories. For each user, you now have a set of ratings.
+
+<img width="550" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/8a424ffc-570f-4ae5-83ca-2a06d7c73a83">
+
+Now each user is represented by a set of five numbers.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/0c4af2f9-d078-42ff-90fd-23c7bce7bf6a">
+
+What's the distance between Priyanka and Justin?
+
+Let's use the distance formula to find it:
+
+```math
+\begin{align}
+& \sqrt{(a_1-a_2)^2 + (b_1-b_2)^2 + (c_1-c_2)^2 + (d_1-d_2)^2 + (e_1-e_2)^2} \\
+= & \sqrt{(3-4)^2 + (4-3)^2 + (4-5)^2 + (1-1)^2 + (4-5)^2} \\
+= & \sqrt{1 + 1 + 1 + 0 + 1} \\
+= & \sqrt{4} \\
+= & 2 
+\end{align}
+```
+
+Priyanka and Justin are pretty similar.
+
+What’s the difference between Priyanka and Morpheus? Priyanka and Morpheus are 24 apart.
+
+The distance tells you that Priyanka’s tastes are more like Justin’s than Morpheus’s.
+
+If you’re a Netflix user, Netflix will keep telling you, “Please rate more movies. The more movies you rate, the better your recommendations will be.” Now you know why. The more movies you rate, the more accurately Netflix can see what other users you’re similar to.
+
+#### Regression
+These are the two basic things you’ll do with KNN—classification and regression:
+- Classification = categorization into a group
+- Regression = predicting a response (like a number)
+
