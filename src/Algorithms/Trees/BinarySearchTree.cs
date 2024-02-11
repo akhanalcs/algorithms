@@ -73,13 +73,27 @@ public class BinarySearchTree<T> where T : IComparable<T>
     
     public IEnumerable<T> GetAllElements() => GetElementsAtNode(Root);
 
-    // Better choice in terms of efficiency and performance compared to GetElementsAtNode1
+
+    // This method returns values 1 at a time.
+    // Each recursive call of GetElementsAtNode(node.Left or Right) results in a new frame on the call stack until the base case of "node is null" is reached.
+    // It goes to the left most node until it's null, at which point it returns with yield break;
+    // After that, it returns to previous call in the stack at which point, it returns the value of that node with node.Value
     private static IEnumerable<T> GetElementsAtNode(Node<T>? node)
     {
-        if (node is null) yield break;
-        foreach (var value in GetElementsAtNode(node.Left)) yield return value;
+        if (node is null) yield break; // returns control back to the previous stack frame
+        // After this foreach loop, which represents the traversal of the left subtree has finished, the execution proceeds to yield return node.Value;
+        foreach (var value in GetElementsAtNode(node.Left))
+        {
+            yield return value; // For eg: Returns 3 AFTER 3 was returned by return node.Value
+        }
+
+        // Yields the parent node's value
         yield return node.Value;
-        foreach (var value in GetElementsAtNode(node.Right)) yield return value;
+        // After it's done with previous block (node.Left loop), it remembers to directly come here, it's at node with value 3
+        foreach (var value in GetElementsAtNode(node.Right))
+        {
+            yield return value;
+        }
     }
     
     private static IEnumerable<T> GetElementsAtNode1(Node<T>? node)
