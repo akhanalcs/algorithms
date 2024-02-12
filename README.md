@@ -762,3 +762,33 @@ These are the two basic things you’ll do with KNN—classification and regress
 - Classification = categorization into a group
 - Regression = predicting a response (like a number)
 
+## Where to go next (page 202)
+### Binary search tree
+Allows you to insert into the array without having to sort the array afterward.
+
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/3eeaf2a0-01a8-44d7-953c-999a3e7a41fc">
+
+For every node, the nodes to its left are smaller in value, and the nodes to the right are larger in value.
+
+Searching for an element in a binary search tree takes $O(\log n)$ time on average and $O(n)$ time in the worst case.
+
+Running times:
+
+|  | Sorted Array | Binary Search Tree |
+|---|---|---|
+| Search | $O(\log n)$ | $O(\log n)$ |
+| Insert | $O(n)$ | $O(\log n)$ |
+| Delete | $O(n)$ | $O(\log n)$ |
+
+Binary search trees don’t get random access like you get with array.
+
+## Other algorithms
+### [Heap](https://en.wikipedia.org/wiki/Heap_(data_structure))
+The heap is one maximally efficient implementation of an abstract data type called a priority queue and in fact, priority queues are often referred to as "heaps", regardless of how they may be implemented.
+
+Heap is one maximally efficient imp
+Priority Queue (implement using Heap data structure)
+
+
+Priority queue represents a collection of items that have a value and a priority. On dequeue, the item with the lowest priority value is removed.
+
