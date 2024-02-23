@@ -36,4 +36,14 @@ public class BinarySearchTreeTests
         // Assert
         Assert.That(searchedItem.Value, Is.EqualTo(3));
     }
+    
+    [Test]
+    public void Built_In_BST_Can_Add_And_Retrieve_Items()
+    {
+        // Arrange and also Act I guess
+        SortedSet<int> bst = [5, 7, 3, 6];
+
+        // Assert
+        CollectionAssert.AreEqual(bst, new[] { 3, 5, 6, 7 });
+    }
 }
