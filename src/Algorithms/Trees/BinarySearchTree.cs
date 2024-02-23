@@ -7,6 +7,7 @@ public class Node<T>(Node<T>? left, Node<T>? right, T value)
     public T Value { get; } = value;
 }
 
+// Built in implementation in .NET: SortedSet<T> Class or SortedDictionary<TKey,TValue> Class
 // For every node in BST, the nodes to its left are smaller in value, and the nodes to the right are larger in value.
 public class BinarySearchTree<T> where T : IComparable<T>
 {
@@ -72,8 +73,7 @@ public class BinarySearchTree<T> where T : IComparable<T>
     }
     
     public IEnumerable<T> GetAllElements() => GetElementsAtNode(Root);
-
-
+    
     // This method returns values 1 at a time.
     // Each recursive call of GetElementsAtNode(node.Left or Right) results in a new frame on the call stack until the base case of "node is null" is reached.
     // It goes to the left most node until it's null, at which point it returns with yield break;
