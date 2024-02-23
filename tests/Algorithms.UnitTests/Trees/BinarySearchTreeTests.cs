@@ -44,6 +44,6 @@ public class BinarySearchTreeTests
         SortedSet<int> bst = [5, 7, 3, 6];
 
         // Assert
-        CollectionAssert.AreEqual(bst, new[] { 3, 5, 6, 7 });
+        CollectionAssert.AreEqual(new[] { 3, 5, 6, 7 }, bst);
     }
 }
