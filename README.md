@@ -782,8 +782,6 @@ Running times:
 
 Binary search trees don’t get random access like you get with array.
 
-## Other algorithms
-### Binary Search Tree
 Built in implementation in .NET: `SortedSet<T>` class or `SortedDictionary<TKey,TValue>` class.
 https://github.com/akhanalcs/algorithms/blob/e3e1ddd0cd745ad5a29f4080b651a63acbebff6b/tests/Algorithms.UnitTests/Trees/BinarySearchTreeTests.cs#L40-L48
 
