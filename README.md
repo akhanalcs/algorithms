@@ -782,7 +782,13 @@ Running times:
 
 Binary search trees don’t get random access like you get with array.
 
-Built in implementation in .NET: `SortedSet<T>` class or `SortedDictionary<TKey,TValue>` class.
+Those performance times are also on average and rely on the tree being balanced. Suppose you have an imbalanced tree like the one shown below.
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/28639e71-9558-4e6f-915d-ebdf85ff7fd5">
+
+This tree doesn’t have very good performance, because it isn’t balanced. There are special binary search trees that balance themselves. One example is the red-black tree. 
+
+Built in implementation of red-black tree in .NET: `SortedSet<T>` class or `SortedDictionary<TKey,TValue>` class.
 https://github.com/akhanalcs/algorithms/blob/e3e1ddd0cd745ad5a29f4080b651a63acbebff6b/tests/Algorithms.UnitTests/Trees/BinarySearchTreeTests.cs#L40-L48
 
 ### [Heap](https://en.wikipedia.org/wiki/Heap_(data_structure))
@@ -791,7 +797,131 @@ The heap is one maximally efficient implementation of an abstract data type call
 Built in min-heap implementation in .NET: `PriorityQueue<TElement,TPriority>` class.
 https://github.com/akhanalcs/algorithms/blob/2dca3267d1adc9e77f9dcff99c7af6e4f9c8d1f4/tests/Algorithms.UnitTests/Trees/BinaryHeapTests.cs#L6-L20
 
+### Inverted Indexes
+It’s commonly used to build search engines.
 
+Suppose you have three web pages with this simple content.
 
+<img width="400" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/881d73d2-1837-4a27-8eaf-93deeceac981">
 
+Let’s build a hash table from this content. The keys of the hash table are the words, and the values tell you what pages each word appears on.
 
+Now suppose a user searches for "adit". Below code shows how it's implemented.
+https://github.com/akhanalcs/algorithms/blob/54f26bc4479d131862ca098b428f1153cfd798c0/tests/Algorithms.UnitTests/Search/InvertedIndexTests.cs#L5-L25
+
+### Fourier transform
+Given a smoothie, the Fourier transform will tell you the ingredients in the smoothie. 
+
+Or, to put it another way, given a song, the transform can separate it into individual frequencies.  
+The Fourier transform tells you exactly how much each note contributes to the overall song. So you can just get rid of the notes that aren’t important. That’s how the MP3 format works!
+
+People use the Fourier transform to try to predict upcoming earthquakes and analyze DNA.  
+You can use it to build an app like Shazam, which guesses what song is playing.
+
+### MapReduce (Parallel algorithm)
+It’s fine to run a parallel algorithm on your laptop if you need two to four cores, but what if you need hundreds of cores? Then you can write your algorithm to run across multiple machines. 
+
+The MapReduce algorithm is a popular **distributed algorithm**. You can use it through the popular open source tool Apache Hadoop.
+
+`MapReduce` is built up from two simple ideas: the `map` function and the `reduce` function.
+
+The `map` function is simple: it takes an array and applies the same function to each item in the array.
+```py
+>>> arr1 = [1, 2, 3, 4, 5]
+>>> arr2 = map(lambda x: 2 * x, arr1)
+[2, 4, 6, 8, 10]
+# OR
+>>> arr1 = # A list of URLs
+>>> arr2 = map(download_page, arr1) # Imagine doing this for thousands of urls across 100s of machine. This is the idea behind "map" in MapReduce.
+```
+
+The `reduce` function confuses people sometimes "reduces” a whole list of items down to one item. 
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/562c055e-8ba4-4ac3-8852-05e38c6df1e0">
+```py
+>>> arr1 = [1, 2, 3, 4, 5]
+>>> reduce(lambda x,y: x+y, arr1)
+15
+```
+
+MapReduce uses these two simple concepts to run queries about data across multiple machines. When you have a large dataset (billions 
+of rows), MapReduce can give you an answer in minutes where a traditional database might take hours. 
+
+### Bloom filters and HyperLogLog
+Just read Page 211.
+
+They are probabilistic algorithms which are useful when you have a lot of data and are satisfied with approximate answers.
+
+### SHA algorithms
+ SHA is a hash function. It generates a hash, which is just a short string.
+
+#### Usage: Comparing files
+The hash function for hash tables went from string to array index, whereas SHA goes from string to string.
+
+<img width="300" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/911e0930-6687-4cb8-9635-5c3a892bb5ce">
+
+You can use SHA to tell whether two files are the same. This is useful when you have very large files. Suppose you have a 4 GB file. You want to check whether your friend has the same large file. You don’t have to try to email them your large file. Instead, you can both calculate the SHA hash and compare it.
+
+<img width="450" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/6e405279-eb27-4d84-8640-5a35c73db025">
+
+#### Usage: Checking passwords
+SHA is also useful when you want to compare strings without revealing what the original string was.
+
+For example, suppose Gmail gets hacked, and the attacker steals all the passwords! Is your password out in the open? No, it isn’t. Google doesn’t store the original password, only the SHA hash of the password! When you type in your password, Google hashes it and checks it against the hash in its database.
+
+<img width="750" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/829985ae-ef0e-4bd2-8e42-2eb3aedbad6c">
+
+It’s a one-way hash. But you can’t get the original string from the hash.
+
+<img width="275" alt="image" src="https://github.com/akhanalcs/algorithms/assets/30603497/ccc5727a-dd82-43ae-84bb-7ae0e361a3b8">
+
+#### Locality-sensitive hashing (Simhash)
+SHA has another important feature: it’s locality **insensitive**. Suppose you have a string, and you generate a hash for it.
+```
+dog --> cd6357
+```
+
+If you change just one character of the string and regenerate the hash, it’s totally different!
+```
+dot --> e392da
+```
+
+This is good because an attacker can’t compare hashes to see whether they’re close to cracking a password. 
+
+Sometimes, you want the opposite: you want a locality-sensitive hash function. That’s where **Simhash** comes in.
+
+If you make a small change to a string, Simhash generates a hash that’s only a little different. This allows you to compare hashes and see how similar two strings are, which is pretty useful!
+- A teacher could use Simhash to see whether a student was copying an essay from the web.
+- Google uses Simhash to detect duplicates while crawling the web.
+
+Simhash is useful when you want to check for similar items!
+
+### Diffie-Hellman key exchange
+How do you encrypt a message so it can only be read by the person you sent the message to? 
+
+The easiest way is to come up with a **cipher**, like `a = 1`, `b = 2`, and so on. Then if I send you the message `“4,15,7”`, you can translate it to `“d,o,g”`. 
+
+Issues with this:
+- Both parties need to know the cipher. This could be leaked.
+- Cipher could be guessed and easily broken. The Germans used a much more complicated cipher in WWII, but it was still cracked.
+
+Diffie-Hellman solves both of the above issues.
+- Both parties don’t need to know the cipher. So we don’t have to meet and agree to what the cipher should be.
+- The encrypted messages are extremely hard to decode.
+
+Diffie-Hellman has two keys: a public key and a private key. The public key is exactly that: public. You can post it on your website, email it to friends, or do anything you want with it. You don’t have to hide it.  
+When someone wants to send you a message, they encrypt it using the public key. An encrypted message can only be decrypted using the 
+private key. As long as you’re the only person with the private key, only you will be able to decrypt this message!  
+The Diffie-Hellman algorithm is still used in practice, along with its successor, RSA. 
+
+### Linear programming
+Linear programming is used to maximize something given some constraints. 
+
+For example, suppose your company makes two products, shirts and totes. Shirts need 1 meter of fabric and 5 buttons. Totes need 
+2 meters of fabric and 2 buttons. You have 11 meters of fabric and 20 buttons. You make $2 per shirt and $3 per tote. How many shirts and 
+totes should you make to maximize your profit?  
+Here you’re trying to maximize profit, and you’re constrained by the amount of materials you have.
+
+**All the graph algorithms can be done through linear programming instead.**
+
+Linear programming is a much more general framework, and graph problems are a subset of that. 🤯
