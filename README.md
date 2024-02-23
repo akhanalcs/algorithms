@@ -783,12 +783,17 @@ Running times:
 Binary search trees don’t get random access like you get with array.
 
 ## Other algorithms
+### Binary Search Tree
+Built in implementation in .NET: `SortedSet<T>` class or `SortedDictionary<TKey,TValue>` class.
+https://github.com/akhanalcs/algorithms/blob/e3e1ddd0cd745ad5a29f4080b651a63acbebff6b/tests/Algorithms.UnitTests/Trees/BinarySearchTreeTests.cs#L40-L48
+
 ### [Heap](https://en.wikipedia.org/wiki/Heap_(data_structure))
 The heap is one maximally efficient implementation of an abstract data type called a priority queue and in fact, priority queues are often referred to as "heaps", regardless of how they may be implemented.
 
-Heap is one maximally efficient imp
-Priority Queue (implement using Heap data structure)
+Built in min-heap implementation in .NET: `PriorityQueue<TElement,TPriority>` class.
+https://github.com/akhanalcs/algorithms/blob/2dca3267d1adc9e77f9dcff99c7af6e4f9c8d1f4/tests/Algorithms.UnitTests/Trees/BinaryHeapTests.cs#L6-L20
 
 
-Priority queue represents a collection of items that have a value and a priority. On dequeue, the item with the lowest priority value is removed.
+
+
 
