@@ -2,6 +2,7 @@ namespace Algorithms.Search;
 
 public static class BinarySearcher
 {
+    // IMP
     // Binary search needs log n operations to check a list of size n
     // So, Time complexity: O(log n)
     // Big O notation tells you the number of operations an algorithm will make
