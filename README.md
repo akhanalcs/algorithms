@@ -40,9 +40,9 @@ Code example:
 https://github.com/akhanalcs/algorithms/blob/c8a7b652a67f6861bda113b18690c8fced8424ab/src/Algorithms/Search/BinarySearcher.cs#L3-L37
 
 ## Common Big O run times
-- $O(\log n)$, also known as _log time_. Example: Binary search.
-- $O(n)$, also known as _linear time_. Example: Simple search.
-- $O(n * \log n)$. Example: A fast sorting algorithm, like quicksort.
+- $O(\log n)$, also known as _log time_. Example: Binary search. $O(\log n)$ basically means time goes up linearly while $n$ goes up exponentially. For eg: if it takes $1$ second to compute $10$ elements, it will take $2$ seconds to compute $100$ elements, $3$ seconds to compute $1000$ elements, and so on.
+- $O(n)$, also known as _linear time_. Example: Simple search. $O(n)$ basically means time goes up linearly with $n$. If it takes $1$ second to compute $10$ elements, it will take $10$ seconds to compute $100$ elements.
+- $O(n * \log n)$. Example: A fast sorting algorithm, like quicksort. $O(n * \log n)$ basically means time goes up slightly faster than linearly with $n$. If it takes $10$ seconds to process $10$ elements ($10 * log₁₀(10) = 10 * 1 = 10$), it would take about $200$ seconds to process $100$ elements ($100 * log₁₀(100) = 100 * 2 = 200$), and $3000$ seconds to process $1000$ elements ($1000 * log₁₀(1000) = 1000 * 3 = 3000$).
 - $O(n^2)$. Example: A slow sorting algorithm, like selection sort. Try to remember it like `ss` so `nn` -> $n^2$.
 - $O(n!)$. Example: A really slow algorithm, like the traveling salesperson. For eg: To go through 5 cities, you have to calculate $5!$ which is $120$. It grows really, really fast. 🤯
 
